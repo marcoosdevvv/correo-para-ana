@@ -1,0 +1,1235 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+<title>Correo para Ana</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IM+Fell+English:ital@0;1&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.js"></script>
+<style>
+/* Layout: a single watercolour sketchbook page, no boxes. Ink-and-wash drawings carry the story: cover with the old balconied building → the summons letter with two drawn windows → twelve "pruebas", each with its own drawn scene, a wallpaper of doodles and a tint → a bouquet with the result. Deliberately one paper look. */
+:root {
+  --paper: #FBF8F2;
+  --ink: #3B2F2A;
+  --ink-soft: #7B6B61;
+  --rule: #E6DCCD;
+  --rose: #E3A1A8;
+  --rose-deep: #A9485D;
+  --sage: #A9BC93;
+  --f-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --f-body: "EB Garamond", Garamond, Georgia, serif;
+  --f-hand: "Caveat", "Bradley Hand", "Segoe Print", cursive;
+  --f-glitch: "Courier New", ui-monospace, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  background-color: var(--paper);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .36  0 0 0 0 .28  0 0 0 0 .2  0 0 0 .08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 19px;
+  line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 64px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+.app { position: relative; z-index: 1; max-width: 480px; margin-inline: auto; }
+section { display: grid; gap: 22px; animation: rise .7s ease both; }
+@keyframes rise { from { transform: translateY(10px); } to { transform: none; } }
+button { font: inherit; color: inherit; cursor: pointer; background: none; border: 0; padding: 0; }
+:focus-visible { outline: 2px dashed var(--rose-deep); outline-offset: 4px; }
+svg.draw { display: block; width: 100%; height: auto; overflow: visible; }
+.label { font-variant: small-caps; letter-spacing: .1em; font-size: 16px; color: var(--ink-soft); }
+@keyframes inkIn { from { opacity: .35; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* glitched, unreadable places */
+.glitch {
+  display: inline-block; font-family: var(--f-glitch); font-size: .78em; font-weight: 700; letter-spacing: .02em; line-height: 1.2;
+  padding: 0 4px; background: rgba(59,47,42,.08); color: var(--ink);
+  text-shadow: 1.5px 0 rgba(230,40,90,.65), -1.5px 0 rgba(0,170,230,.6);
+  animation: jitter .26s steps(2) infinite;
+  white-space: nowrap; max-width: 100%; overflow: hidden; vertical-align: baseline;
+}
+@keyframes jitter { 0% { transform: translate(0, 0); } 33% { transform: translate(1px, -1px) skewX(-8deg); } 66% { transform: translate(-1px, 1px) skewX(5deg); clip-path: inset(10% 0 30% 0); } 100% { transform: translate(0, 0); } }
+
+/* ---------- Cover ---------- */
+.cover { text-align: center; gap: 6px; min-height: calc(100vh - 100px); align-content: center; }
+.ill { margin: 0 -8px; }
+.seal-wrap { position: relative; display: grid; justify-items: center; margin-top: -58px; z-index: 2; }
+.seal {
+  width: 84px; height: 84px; border-radius: 47% 53% 50% 50% / 54% 46% 54% 46%;
+  background: radial-gradient(circle at 34% 30%, #CD6C80 0, var(--rose-deep) 52%, #6E2234 100%);
+  box-shadow: inset 0 0 0 7px rgba(0,0,0,.1), inset 0 0 0 10px rgba(255,255,255,.07), 0 8px 16px -6px rgba(110,34,52,.6);
+  display: grid; place-items: center;
+  font-family: var(--f-display); font-style: italic; font-size: 38px; color: rgba(255,232,236,.85);
+  text-shadow: 0 -1px 0 rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.2);
+  animation: breathe 2.6s ease-in-out infinite;
+  transition: transform .2s ease;
+}
+.seal:hover { transform: scale(1.06) rotate(-4deg); }
+.seal.broken { animation: crack .7s ease-in forwards; pointer-events: none; }
+@keyframes breathe { 50% { transform: scale(1.05); } }
+@keyframes crack { 30% { transform: scale(1.15) rotate(-8deg); } 100% { transform: translateY(40px) scale(.85) rotate(26deg); opacity: 0; } }
+.seal-note { position: absolute; left: calc(50% + 50px); top: 6px; display: flex; align-items: flex-start; gap: 2px; font-family: var(--f-hand); font-size: 24px; color: var(--rose-deep); transform: rotate(-6deg); white-space: nowrap; pointer-events: none; }
+.seal-note svg { width: 34px; height: 30px; margin-top: 10px; }
+
+/* ---------- Letter ---------- */
+.letter .hand { font-family: var(--f-hand); font-size: 26px; line-height: 36px; font-weight: 500; }
+.letter .hand h2 { font-family: var(--f-hand); font-size: 38px; font-weight: 700; margin: 0 0 6px; line-height: 42px; }
+.letter .hand p { margin: 0 0 18px; }
+.letter .sign { text-align: right; margin: 6px 0 0; font-size: 32px; font-weight: 700; }
+.sprig { width: 200px; margin: 10px auto 0; }
+.days-title { font-family: var(--f-display); font-style: italic; font-weight: 400; font-size: 30px; text-align: center; margin: 4px 0 0; }
+.days { display: grid; gap: 26px; }
+.day { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 16px; align-items: center; }
+.day:nth-child(2) { grid-template-columns: minmax(0, 1fr) 112px; }
+.day:nth-child(2) .win { order: 2; }
+.day h3 { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: 25px; line-height: 1.12; text-wrap: balance; }
+.day h3 em { display: block; font-size: 17px; color: var(--rose-deep); font-style: italic; margin-bottom: 2px; }
+.day p { margin: 6px 0 0; font-size: 18px; line-height: 1.5; }
+.rule-alarm { font-variant: small-caps; font-weight: 500; letter-spacing: .06em; color: var(--rose-deep); white-space: nowrap; }
+.cta { display: grid; justify-items: center; gap: 8px; text-align: center; margin-top: 8px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 54px; padding: 8px 28px;
+  font-family: var(--f-display); font-style: italic; font-size: 21px; color: var(--ink); text-decoration: none;
+  background: rgba(227,161,168,.42);
+  border: 2px solid var(--ink);
+  border-radius: 255px 18px 225px 18px / 18px 225px 18px 255px;
+  transition: transform .15s ease, background .2s ease;
+}
+.btn:hover { transform: rotate(-1deg) scale(1.02); background: rgba(227,161,168,.62); }
+.btn:active { transform: scale(.98); }
+.btn.green { background: rgba(169,188,147,.5); }
+.btn.green:hover { background: rgba(169,188,147,.7); }
+.btn.plain { background: rgba(251,248,242,.7); }
+.btn:disabled { opacity: .35; cursor: default; transform: none; }
+.link { font-family: var(--f-hand); font-size: 23px; color: var(--ink-soft); padding: 6px 4px; }
+.link:hover { color: var(--rose-deep); }
+.small { font-size: 16px; color: var(--ink-soft); font-style: italic; margin: 0; }
+
+/* ---------- Pruebas ---------- */
+.scene-layer { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+#v-ficha {
+  gap: 16px;
+  margin-inline: -16px; padding-inline: 16px;
+  background: radial-gradient(ellipse 70% 52% at 50% 62%, rgba(251,248,242,.8) 40%, rgba(251,248,242,0) 100%);
+}
+.banner { margin: -10px -6px -6px; }
+.form-head { text-align: center; display: grid; gap: 0; }
+.form-head h2 { margin: 0; font-family: var(--f-display); font-style: italic; font-weight: 400; font-size: clamp(27px, 7.4vw, 33px); line-height: 1.1; text-wrap: balance; }
+.vine { margin-top: 4px; }
+.vine .lf { fill: transparent; stroke: var(--ink); stroke-width: 1; transition: fill .4s ease; }
+.vine .lf.done { fill: var(--sage); }
+.vine .lf.now { fill: var(--rose); }
+.intro { margin: 0; font-family: var(--f-hand); font-size: 24px; line-height: 1.25; color: var(--rose-deep); text-align: center; text-wrap: balance; }
+.q { font-family: var(--f-display); font-weight: 400; font-size: clamp(23px, 6vw, 27px); line-height: 1.25; margin: 0; text-wrap: balance; }
+.q-hint { margin: -12px 0 0; font-style: italic; color: var(--ink-soft); font-size: 17px; }
+.opts { display: grid; gap: 4px; }
+.opt {
+  position: relative; display: flex; gap: 12px; align-items: baseline; width: 100%; text-align: left;
+  padding: 11px 16px; font-size: 19px; line-height: 1.38; border-radius: 30px 8px 26px 10px / 10px 26px 8px 30px;
+  transition: background .2s ease;
+}
+.opt:hover { background: rgba(227,161,168,.16); }
+.opt .k { font-family: var(--f-display); font-style: italic; color: var(--rose-deep); font-size: 20px; flex: none; }
+.circ { position: absolute; inset: -3px -4px; width: calc(100% + 8px); height: calc(100% + 6px); pointer-events: none; overflow: visible; }
+.circ path { fill: none; stroke: var(--rose-deep); stroke-width: 1.8; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; transition: stroke-dashoffset .55s ease, opacity .1s; }
+[aria-pressed="true"] > .circ path { stroke-dashoffset: 0; opacity: 1; }
+.other-wrap { padding: 0 16px 0 44px; margin-top: -2px; }
+.chips { display: flex; flex-wrap: wrap; gap: 4px 6px; }
+.chip { position: relative; padding: 6px 12px; font-size: 19px; border-radius: 20px; }
+.chip:hover { background: rgba(227,161,168,.16); }
+.under {
+  width: 100%; font: inherit; font-family: var(--f-hand); font-size: 25px; color: var(--ink);
+  background: transparent; border: 0; border-bottom: 1.5px solid var(--ink-soft); padding: 4px 2px; border-radius: 0;
+}
+.lined {
+  width: 100%; min-height: 150px; resize: vertical; border: 0; border-radius: 0; padding: 2px 4px; color: var(--ink);
+  font-family: var(--f-hand); font-size: 25px; line-height: 36px;
+  background: transparent repeating-linear-gradient(transparent 0 35px, var(--rule) 35px 36px);
+  background-attachment: local;
+}
+.under:focus, .lined:focus { outline: none; border-color: var(--rose-deep); }
+.lined:focus { background-image: repeating-linear-gradient(transparent 0 35px, rgba(169,72,93,.35) 35px 36px); }
+.qnav { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 6px; }
+.qnav .btn { min-height: 46px; font-size: 19px; padding: 6px 24px; }
+.qfade { display: grid; gap: 22px; animation: inkIn .45s ease both; }
+
+/* ---------- Result ---------- */
+.result { text-align: center; display: grid; justify-items: center; gap: 4px; }
+.bouquet { width: 170px; }
+.postmark {
+  display: inline-grid; place-items: center; width: 116px; height: 116px; border-radius: 50%;
+  border: 2px solid var(--rose-deep); outline: 1px solid var(--rose-deep); outline-offset: 4px;
+  color: var(--rose-deep); font-variant: small-caps; letter-spacing: .12em; font-size: 15px; line-height: 1.2;
+  transform: rotate(-10deg); margin: -6px 0 10px; opacity: .85;
+  animation: stampIn .5s cubic-bezier(.3,1.6,.5,1) both .2s;
+}
+@keyframes stampIn { from { transform: rotate(-10deg) scale(1.5); opacity: .3; } to { transform: rotate(-10deg) scale(1); opacity: .85; } }
+.result h2 { margin: 2px 0 6px; font-family: var(--f-display); font-style: italic; font-weight: 400; font-size: clamp(36px, 10vw, 46px); line-height: 1.05; text-wrap: balance; }
+.result p { margin: 0 auto; max-width: 32ch; font-style: italic; color: var(--ink-soft); }
+.send { display: grid; gap: 14px; text-align: center; justify-items: center; }
+.send p { margin: 0; }
+.send .row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.ficha-label { justify-self: start; }
+.ficha-txt { min-height: 230px; font-size: 21px; line-height: 30px; background-image: repeating-linear-gradient(transparent 0 29px, var(--rule) 29px 30px); }
+
+/* ---------- Petals ---------- */
+.petal {
+  position: fixed; top: -24px; z-index: 20; width: 15px; height: 12px; pointer-events: none;
+  background: radial-gradient(circle at 30% 30%, #F4C9CE, var(--rose) 60%, #C97683);
+  border-radius: 80% 0 80% 0; opacity: .9;
+  animation: fall var(--d) cubic-bezier(.3,.1,.6,1) var(--delay) forwards;
+}
+@keyframes fall {
+  0% { transform: translate(0, 0) rotate(0); }
+  50% { transform: translate(calc(var(--dx) * -.6), 55vh) rotate(calc(var(--r) * .5)); }
+  100% { transform: translate(var(--dx), 112vh) rotate(var(--r)); opacity: .7; }
+}
+
+@media (max-width: 380px) {
+  .day, .day:nth-child(2) { grid-template-columns: 92px minmax(0, 1fr); }
+  .day:nth-child(2) .win { order: 0; }
+  .seal-note { left: calc(50% + 46px); font-size: 21px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  [aria-pressed="true"] > .circ path { stroke-dashoffset: 0; }
+}
+</style>
+
+<!-- shared watercolour filters -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="wc" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="4" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="16" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="0.7"/>
+    </filter>
+    <filter id="wcs" x="-30%" y="-30%" width="160%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="2" seed="9" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="0.4"/>
+    </filter>
+  </defs>
+</svg>
+
+<svg class="scene-layer" id="scene" hidden aria-hidden="true"></svg>
+
+<main class="app">
+
+  <!-- 1 · Portada -->
+  <section id="v-sobre" class="cover" aria-label="Portada">
+    <div class="ill"><svg class="draw" id="ill-cover" viewBox="0 0 360 430" role="img" aria-label="Dibujo a tinta y acuarela de una fachada antigua con un balcón lleno de flores"></svg></div>
+    <div class="seal-wrap">
+      <button class="seal" id="seal" aria-label="Romper el sello y abrir la carta"><span id="seal-letter">A</span></button>
+      <span class="seal-note" aria-hidden="true">
+        <svg viewBox="0 0 34 30"><path d="M32 4 C22 2 10 8 6 22 M6 22 L3 13 M6 22 L14 18" fill="none" stroke="#A9485D" stroke-width="1.6" stroke-linecap="round"/></svg>
+        rompe el sello
+      </span>
+    </div>
+  </section>
+
+  <!-- 2 · Carta -->
+  <section id="v-carta" hidden aria-label="Carta">
+    <article class="letter">
+      <div class="hand">
+        <h2><span class="js-para">Ana</span> Banana:</h2>
+        <p>Usted queda citada oficialmente los días 13 y 15 de noviembre en la dirección <span class="glitch" data-len="15" role="img" aria-label="dirección ilegible"></span>.</p>
+        <p>Para poder acudir tendrás que pasar por una prueba muy rigurosa, la cual empieza ahora, donde tendrás que recorrer el desierto sola y descalza, contestar a unas preguntas, luchar contra caimanes, subir el Everest a una mano…</p>
+        <p>Te deseo la mejor de las suertes.</p>
+        <p class="sign">Marquet</p>
+      </div>
+      <svg class="draw sprig" id="sprig" viewBox="0 0 200 40" aria-hidden="true"></svg>
+    </article>
+
+    <h2 class="days-title">Tus dos ventanas</h2>
+    <div class="days">
+      <div class="day">
+        <svg class="draw win" id="win-1" viewBox="0 0 120 160" aria-hidden="true"></svg>
+        <div>
+          <h3><em>Ventana I</em>Viernes 13 de noviembre</h3>
+          <p>Desde después de comer hasta que se haga de noche. Ven cómoda, pero guapa.</p>
+        </div>
+      </div>
+      <div class="day">
+        <svg class="draw win" id="win-2" viewBox="0 0 120 160" aria-hidden="true"></svg>
+        <div>
+          <h3><em>Ventana II</em>Sábado 14 y domingo 15</h3>
+          <p>El sábado por la noche tendrás que acudir a tu morada, donde tu mayordomo especial estará esperándote, listo para atender todas tus peticiones. El domingo habrá una norma: <span class="rule-alarm">NO ALARMAS PERMITIDAS</span>. A mediodía recibiremos a nuestros invitados y finalizaremos por la tarde con <span class="glitch" data-len="11" role="img" aria-label="plan ilegible"></span>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <button class="btn" id="go-ficha">Empezar la prueba</button>
+    </div>
+  </section>
+
+  <!-- 3 · Pruebas -->
+  <section id="v-ficha" hidden aria-label="Pruebas">
+    <svg class="draw banner" id="banner" viewBox="0 0 400 190" aria-hidden="true"></svg>
+    <div class="form-head">
+      <span class="label" id="qcount">prueba 1 de 12</span>
+      <h2 id="qtitle">El desayuno de la campeona</h2>
+      <svg class="draw vine" id="vine" viewBox="0 0 340 56" aria-hidden="true"></svg>
+    </div>
+    <p class="intro" id="qintro"></p>
+    <div id="qbox"></div>
+    <div class="qnav">
+      <button class="link" id="prev">← anterior</button>
+      <button class="btn green" id="next">Siguiente</button>
+    </div>
+  </section>
+
+  <!-- 4 · Resultado -->
+  <section id="v-fin" hidden aria-label="Ficha completada">
+    <div class="result">
+      <svg class="draw bouquet" id="bouquet" viewBox="0 0 200 210" aria-hidden="true"></svg>
+      <span class="postmark">ficha<br>recibida<br>13·xi</span>
+      <span class="label">tu tipo de cumpleañera</span>
+      <h2 id="tipo">La Protagonista</h2>
+      <p id="tipo-desc"></p>
+    </div>
+
+    <svg class="draw sprig" id="sprig-2" viewBox="0 0 200 40" aria-hidden="true"></svg>
+
+    <div class="send">
+      <span class="label">último paso</span>
+      <p>Mándame tu ficha a mí, tu mayordomo personal/novio.</p>
+      <div class="row">
+        <a class="btn green" id="wa" href="https://wa.me/" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+        <button class="btn plain" id="copy">Copiar ficha</button>
+      </div>
+      <p class="small" id="copy-msg">Si WhatsApp no se abre, copia la ficha y pégamela en nuestro chat.</p>
+      <label class="label ficha-label" for="ficha-txt">tu ficha</label>
+      <textarea class="lined ficha-txt" id="ficha-txt" readonly></textarea>
+    </div>
+
+    <div class="cta">
+      <button class="link" id="back-sobres">volver a mis ventanas</button>
+      <button class="link" id="redo">cambiar mis respuestas</button>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  const PARA = "Ana";
+  const KEY = "correo-para-ana-v1";
+
+  // s = comodidad delante de desconocidos, f = cantar con su gente
+  const Q = [
+    { id: "desayuno", label: "Desayuno ideal", type: "one", other: true, scene: "breakfast",
+      title: "El desayuno de la campeona", intro: "Toda gran hazaña empieza con energía.",
+      q: "¿Cómo es tu desayuno de cumpleaños ideal?",
+      opts: [{ t: "Dulce: tortitas, bollería, chocolate" }, { t: "Salado: tostadas, huevos, aguacate" }, { t: "De hotel: un poco de todo" }, { t: "Café y fruta, que luego hay mucho que comer" }] },
+    { id: "micro", label: "Micro en la boda", type: "one", scene: "dj",
+      title: "La boda del DJ", intro: "Prueba de nervios de acero.",
+      q: "Boda de tu prima. El DJ te pone un micro en la mano delante de 150 invitados. ¿Qué haces?",
+      opts: [{ t: "Lo cojo y suelto el discurso del siglo", s: 2 }, { t: "Digo algo cortito y bonito, y lo devuelvo", s: 1 }, { t: "Se lo paso a quien tenga al lado", s: -1 }, { t: "Descubro una necesidad urgente de ir al baño", s: -2 }] },
+    { id: "fuerzas", label: "Lo que más me llega", type: "one", scene: "desert",
+      title: "El desierto, sola y descalza", intro: "Tres días caminando. La arena quema. Solo una cosa te mantiene en pie…",
+      q: "¿Qué te daría fuerzas para llegar hasta el final?",
+      opts: [{ t: "Está tu novio y tu fam esperándote (veo lo que eliges, eh guapa, a ver cuál seleccionas)" }, { t: "Algo sorpresa" }, { t: "Un detalle chill hecho a mano" }, { t: "Qué leches dices, pues una botella de agua y una piscina" }] },
+    { id: "coche", label: "Mi canción en el coche", type: "one", scene: "road",
+      title: "La carretera infinita", intro: "Mil kilómetros por delante y la radio encendida.",
+      q: "Vas en el coche con tus amigas y empieza a sonar tu canción.",
+      opts: [{ t: "La canto a gritos con la ventanilla bajada", s: 1, f: 2 }, { t: "La canto a gritos… con las ventanillas bien subidas", s: -1, f: 2 }, { t: "La tarareo y la letra me la invento", f: 1 }, { t: "Subo el volumen y la escucho", f: -1 }] },
+    { id: "fruta", label: "Mis frutas", type: "multi", scene: "swamp",
+      title: "El pantano de los caimanes", intro: "Para cruzarlo tendrás que distraer a los caimanes lanzándoles fruta.",
+      q: "Elige tu munición: fruta que te comerías a cajas.",
+      hint: "Rodea todas las que quieras (no pienses solo en lo que les hará daño a los caimanes, jajaja, piensa en la fruta que te gusta, eh).",
+      opts: ["Fresas", "Mango", "Granada", "Caqui", "Mandarinas", "Kiwi", "Plátano", "Piña", "Frambuesas", "Melocotón", "Uvas", "Arándanos"] },
+    { id: "peli", label: "Mi cumple como peli", type: "one", scene: "cinema",
+      title: "La sesión de cine eterna", intro: "Se apagan las luces y las puertas se cierran con llave.",
+      q: "Si tu cumple de este año fuera una peli, sería…",
+      opts: [{ t: "Comedia romántica de las de llorar de risa" }, { t: "Aventura: no sé qué va a pasar y me encanta" }, { t: "Peli de amigas, con fiesta de pijamas incluida" }, { t: "Peli de domingo: bonita, tranquila y con final feliz" }] },
+    { id: "cumplefeliz", label: "Cumpleaños feliz en el restaurante", type: "one", scene: "party",
+      title: "La bengala", intro: "De repente, alguien apaga las luces del restaurante…",
+      q: "Salen los camareros con una bengala cantándote el cumpleaños feliz y todo el local se gira a mirarte.",
+      opts: [{ t: "Me encanta: me levanto y lo vivo", s: 2 }, { t: "Me pongo roja, pero lo disfruto", s: 1 }, { t: "Aguanto el tipo como puedo", s: -1 }, { t: "Tierra, trágame", s: -2 }] },
+    { id: "domingo", label: "Domingo por la tarde", type: "one", scene: "everest",
+      title: "El Everest, a una mano", intro: "Estás colgada a 8.000 metros con una sola mano. Para no mirar abajo, piensa en cuando vuelvas a casa el domingo…",
+      q: "Cuando bajes del Everest, tu domingo por la tarde ideal será…",
+      opts: [{ t: "Manta, peli y algo rico" }, { t: "Hacer algo con las manos: pintar, cocinar, manualidades" }, { t: "Paseo largo y ver el atardecer" }, { t: "Juegos de mesa y piques" }] },
+    { id: "sorpresas", label: "Sorpresas", type: "one", scene: "treasure",
+      title: "El cofre misterioso", intro: "En una isla desierta encuentras un cofre. Antes de abrirlo, confiesa…",
+      q: "Las sorpresas, ¿cómo te gustan?",
+      opts: [{ t: "Cuanto más grandes, mejor" }, { t: "Pequeñitas y con mucho detalle" }, { t: "Me gustan, pero dame una pista para ir preparada" }, { t: "Odio no saber nada (y aun así aquí estoy)" }] },
+    { id: "noche", label: "Noche ideal", type: "one", scene: "night",
+      title: "La noche más larga", intro: "Tienes que aguantar despierta hasta el amanecer.",
+      q: "¿Cómo es tu noche ideal?",
+      opts: [{ t: "Un sitio con ambiente y gente, de los que acabas animadísima", s: 2 }, { t: "Mi gente y un poco de marcha", s: 1 }, { t: "Solo con los míos, a nuestro rollo", s: -1 }, { t: "Pijama a las diez y orgullosa", s: -2 }] },
+    { id: "canciones", label: "Mis canciones himno", type: "text", scene: "radio",
+      title: "La radio pirata", intro: "Has tomado una emisora y solo puedes poner tres canciones. Sonarán en bucle.",
+      q: "Tus tres canciones himno, las que te ponen de buen humor sí o sí.",
+      ph: "1.\n2.\n3." },
+    { id: "deseo", label: "Algo que siempre he querido hacer", type: "text", scene: "wish",
+      title: "La estrella fugaz", intro: "Lo has conseguido. Como premio, una estrella fugaz te concede un deseo.",
+      q: "Algo que siempre has querido hacer y nunca has hecho (que no cueste un riñón).",
+      ph: "Siempre he querido…" }
+  ];
+
+  const TIPOS = [
+    { n: "La Protagonista", d: "Si hay un foco en la sala, acaba apuntándote a ti, y te encanta. Tu cumple se vive a lo grande y con público." },
+    { n: "La que se viene arriba", d: "Empiezas tranquila, observando, y a la media hora eres el alma del sitio. Con tu gente cerca no hay quien te pare." },
+    { n: "La del círculo íntimo", d: "Tu sitio favorito del mundo es rodeada de los tuyos. No necesitas focos, necesitas a tu gente." }
+  ];
+
+  /* ================= drawing kit ================= */
+  const NS = "http://www.w3.org/2000/svg";
+  const C = {
+    ink: "#3B2F2A", rose: "#E7899B", blush: "#F2B6C0", roseDeep: "#A9485D", sage: "#A9BC93", leaf: "#6E8A58",
+    ochre: "#E8CFA3", sky: "#BCD3DE", glass: "#93A9B4", lilac: "#C9B3D6", shade: "#7B6B61",
+    coffee: "#9C6B4E", amber: "#E7B877", butter: "#F6DE8D", syrup: "#C77C3A", yolk: "#F2C14E", orange: "#EFA25B",
+    red: "#E06C6C", sand: "#EAC98F", water: "#8FB3A3", snow: "#DCE8F0", night: "#7C84B5", white: "#FFFFFF"
+  };
+  let LITE = false; // wallpaper mode: no displacement filters, for speed
+
+  function prng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function el(tag, attrs) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; }
+  function wash(target, tag, attrs, color, op) {
+    const a = Object.assign({ fill: color, opacity: op, style: "mix-blend-mode:multiply" }, attrs);
+    if (LITE) delete a.filter; else if (!attrs.filter) a.filter = "url(#wc)";
+    const e = el(tag, a); target.appendChild(e); return e;
+  }
+  function leafD(x, y, a, l) {
+    const tx = x + Math.cos(a) * l, ty = y + Math.sin(a) * l, mx = (x + tx) / 2, my = (y + ty) / 2;
+    const n = a + Math.PI / 2, w = l * 0.36;
+    return `M${x.toFixed(1)} ${y.toFixed(1)} Q${(mx + Math.cos(n) * w).toFixed(1)} ${(my + Math.sin(n) * w).toFixed(1)} ${tx.toFixed(1)} ${ty.toFixed(1)} Q${(mx - Math.cos(n) * w).toFixed(1)} ${(my - Math.sin(n) * w).toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)}`;
+  }
+  const NOP = new Proxy({}, { get: () => () => null });
+  function inkPen(root, seed, target, scale) {
+    if (!window.rough) return NOP;
+    const rc = window.rough.svg(root);
+    const k = 1 / Math.max(scale || 1, 0.35);
+    const o = (x) => { const r = Object.assign({ stroke: C.ink, strokeWidth: 1.1, roughness: 1.2, bowing: 1.1, seed: seed }, x || {}); r.strokeWidth *= k; if (r.fillWeight) r.fillWeight *= k; return r; };
+    const t = target || root;
+    const add = (n) => { t.appendChild(n); return n; };
+    return {
+      line: (a, b, c, d, x) => add(rc.line(a, b, c, d, o(x))),
+      rect: (a, b, c, d, x) => add(rc.rectangle(a, b, c, d, o(x))),
+      path: (d, x) => add(rc.path(d, o(x))),
+      curve: (pts, x) => add(rc.curve(pts, o(x))),
+      circle: (a, b, d, x) => add(rc.circle(a, b, d, o(x))),
+      ellipse: (a, b, w, h, x) => add(rc.ellipse(a, b, w, h, o(x))),
+      polygon: (pts, x) => add(rc.polygon(pts, o(x)))
+    };
+  }
+  function blossom(svg, pen, rnd, x, y, color, size) {
+    const r = (size || 8) * (0.75 + rnd() * 0.5);
+    wash(svg, "circle", { cx: x, cy: y, r: r, filter: "url(#wcs)" }, color, 0.9);
+    if (rnd() > 0.35) pen.circle(x + (rnd() - .5) * 3, y + (rnd() - .5) * 3, r * 0.55, { strokeWidth: 0.7, roughness: 1.6 });
+  }
+  function sparkle(p, x, y, r) {
+    p.line(x - r, y, x + r, y, { strokeWidth: .8, roughness: .4 }); p.line(x, y - r, x, y + r, { strokeWidth: .8, roughness: .4 });
+    p.line(x - r * .5, y - r * .5, x + r * .5, y + r * .5, { strokeWidth: .6, roughness: .4 }); p.line(x - r * .5, y + r * .5, x + r * .5, y - r * .5, { strokeWidth: .6, roughness: .4 });
+  }
+  function starD(r1, r2) {
+    let d = "";
+    for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, r = i % 2 ? r2 : r1; d += (i ? "L" : "M") + (Math.cos(a) * r).toFixed(1) + " " + (Math.sin(a) * r).toFixed(1) + " "; }
+    return d + "Z";
+  }
+
+  /* Motifs: drawn in a local ~100×100 box centred on 0,0 */
+  const M = {
+    // breakfast
+    cup(g, p) {
+      const d = "M-26 -8 L26 -8 L21 24 Q0 32 -21 24 Z";
+      wash(g, "path", { d }, C.sky, .65); wash(g, "ellipse", { cx: 0, cy: -8, rx: 24, ry: 5 }, C.coffee, .85);
+      p.path(d); p.ellipse(0, -8, 52, 12); p.path("M26 -2 Q42 0 38 12 Q34 20 22 16"); p.ellipse(0, 30, 84, 14);
+      [-10, 0, 10].forEach((x) => p.path(`M${x} -18 Q${x - 6} -27 ${x} -35 Q${x + 6} -43 ${x} -50`, { strokeWidth: .8 }));
+    },
+    croissant(g, p) {
+      const d = "M-44 12 Q-34 -24 0 -26 Q34 -24 44 12 Q32 4 22 8 Q12 -8 0 -8 Q-12 -8 -22 8 Q-32 4 -44 12 Z";
+      wash(g, "path", { d }, C.amber, .8); p.path(d);
+      [-26, -10, 10, 26].forEach((x) => p.path(`M${x} ${-20 + Math.abs(x) / 3} Q${x * .9 + 3} -6 ${x * 1.08} ${2 + Math.abs(x) / 5}`, { strokeWidth: .8 }));
+    },
+    pancakes(g, p) {
+      wash(g, "ellipse", { cx: 0, cy: 30, rx: 46, ry: 9 }, C.sky, .5); p.ellipse(0, 30, 92, 18);
+      for (let i = 0; i < 3; i++) { const y = 20 - i * 12; wash(g, "ellipse", { cx: 0, cy: y, rx: 36, ry: 8 }, C.amber, .75); p.ellipse(0, y, 72, 16, { strokeWidth: .9 }); }
+      wash(g, "rect", { x: -8, y: -22, width: 16, height: 8 }, C.butter, .95); p.rect(-8, -22, 16, 8, { strokeWidth: .8 });
+      wash(g, "path", { d: "M-22 -8 Q-26 8 -20 12 Q-15 8 -17 -6 Z M14 -6 Q18 10 23 6 Q21 -2 19 -8 Z" }, C.syrup, .75);
+    },
+    toast(g, p) {
+      const d = "M-30 30 L-30 -10 Q-38 -34 -14 -34 Q0 -44 14 -34 Q38 -34 30 -10 L30 30 Z";
+      wash(g, "path", { d }, C.amber, .65); p.path(d);
+      [[-12, 4], [4, -8], [12, 10], [-4, 18]].forEach(([x, y]) => { wash(g, "ellipse", { cx: x, cy: y, rx: 9, ry: 6 }, C.sage, .95); p.ellipse(x, y, 18, 12, { strokeWidth: .7 }); });
+    },
+    egg(g, p) {
+      const d = "M-34 0 Q-36 -26 -8 -28 Q20 -36 32 -12 Q44 14 16 26 Q-12 36 -28 18 Q-36 10 -34 0 Z";
+      p.path(d); wash(g, "circle", { cx: 0, cy: -2, r: 13, filter: "url(#wcs)" }, C.yolk, .95); p.circle(0, -2, 26);
+    },
+    orange(g, p) {
+      wash(g, "circle", { cx: 0, cy: 0, r: 30 }, C.orange, .75); p.circle(0, 0, 60); p.circle(0, 0, 48, { strokeWidth: .7 });
+      for (let i = 0; i < 8; i++) { const a = i * Math.PI / 4; p.line(0, 0, Math.cos(a) * 23, Math.sin(a) * 23, { strokeWidth: .7 }); }
+    },
+    strawberry(g, p) {
+      const d = "M0 34 Q-30 10 -26 -10 Q-22 -24 0 -20 Q22 -24 26 -10 Q30 10 0 34 Z";
+      wash(g, "path", { d }, C.red, .75); p.path(d);
+      for (let i = 0; i < 8; i++) p.circle(-12 + (i % 3) * 12 + (i > 5 ? 6 : 0), -6 + Math.floor(i / 3) * 12, 2.4, { strokeWidth: .6 });
+      wash(g, "path", { d: "M-14 -22 L0 -32 L14 -22 L0 -18 Z" }, C.leaf, .8); p.path("M-14 -22 Q-6 -20 0 -32 Q6 -20 14 -22 M0 -32 L0 -42");
+    },
+    // wedding / DJ
+    mic(g, p) {
+      wash(g, "circle", { cx: 0, cy: -26, r: 16 }, C.shade, .35);
+      p.circle(0, -26, 32, { fill: C.ink, fillStyle: "cross-hatch", hachureGap: 5, fillWeight: .4 });
+      const d = "M-8 -12 L8 -12 L5 30 L-5 30 Z"; wash(g, "path", { d }, C.rose, .65); p.path(d);
+      p.curve([[0, 30], [4, 42], [-10, 48], [-28, 44]], { strokeWidth: .9 });
+    },
+    speaker(g, p) {
+      wash(g, "rect", { x: -24, y: -36, width: 48, height: 72 }, C.shade, .3); p.rect(-24, -36, 48, 72);
+      p.circle(0, -16, 22); p.circle(0, -16, 8); p.circle(0, 14, 32); p.circle(0, 14, 12);
+    },
+    disco(g, p) {
+      p.line(0, -52, 0, -30); wash(g, "circle", { cx: 0, cy: 0, r: 30 }, C.lilac, .65);
+      p.circle(0, 0, 60, { fill: C.ink, fillStyle: "cross-hatch", hachureGap: 7, fillWeight: .35 });
+      sparkle(p, -40, -22, 6); sparkle(p, 38, -30, 5); sparkle(p, 40, 26, 6);
+    },
+    note(g, p) {
+      p.ellipse(-10, 22, 18, 12, { fill: C.ink, fillStyle: "solid" }); p.line(-2, 20, -2, -28, { strokeWidth: 1.4 });
+      p.path("M-2 -28 Q14 -20 14 -4", { strokeWidth: 1.4 });
+    },
+    notes(g, p) {
+      p.ellipse(-18, 24, 16, 11, { fill: C.ink, fillStyle: "solid" }); p.ellipse(16, 18, 16, 11, { fill: C.ink, fillStyle: "solid" });
+      p.line(-11, 22, -11, -22, { strokeWidth: 1.3 }); p.line(23, 16, 23, -28, { strokeWidth: 1.3 });
+      p.polygon([[-11, -22], [23, -28], [23, -20], [-11, -14]], { fill: C.ink, fillStyle: "solid" });
+    },
+    lights(g, p) {
+      p.curve([[-50, -14], [-25, 4], [0, 8], [25, 4], [50, -14]], { strokeWidth: .9 });
+      [-38, -19, 0, 19, 38].forEach((x, i) => { const y = 8 - Math.abs(x) / 4; wash(g, "circle", { cx: x, cy: y + 10, r: 6, filter: "url(#wcs)" }, i % 2 ? C.yolk : C.rose, .95); p.ellipse(x, y + 10, 9, 13, { strokeWidth: .7 }); });
+    },
+    weddingcake(g, p) {
+      [[-32, 10, 64, 26], [-23, -12, 46, 22], [-14, -32, 28, 20]].forEach(([x, y, w, h], i) => { wash(g, "rect", { x, y, width: w, height: h }, i === 1 ? C.blush : C.ochre, .6); p.rect(x, y, w, h); });
+      p.path("M0 -38 C-3 -44 -10 -41 -6 -36 L0 -31 L6 -36 C10 -41 3 -44 0 -38 Z", { stroke: C.roseDeep, fill: C.rose, fillStyle: "solid", roughness: .5 });
+      for (let x = -28; x <= 28; x += 8) p.path(`M${x} 10 Q${x + 4} 16 ${x + 8} 10`, { strokeWidth: .7 });
+    },
+    flutes(g, p) {
+      [[-14, -12], [14, 12]].forEach(([x, r]) => {
+        const gg = el("g", { transform: `translate(${x} 0) rotate(${r})` }); g.appendChild(gg);
+        wash(gg, "path", { d: "M-8 -16 L8 -16 Q7 -2 0 2 Q-7 -2 -8 -16 Z" }, C.yolk, .8);
+        const pp = inkPen(g.ownerSVGElement || g, 4, gg, 1);
+        pp.path("M-9 -36 L9 -36 Q9 -2 0 2 Q-9 -2 -9 -36 Z"); pp.line(0, 2, 0, 30); pp.line(-10, 31, 10, 31);
+      });
+      sparkle(p, 0, -44, 7);
+    },
+    // desert
+    sun(g, p) {
+      wash(g, "circle", { cx: 0, cy: 0, r: 24 }, C.yolk, .85); p.circle(0, 0, 48);
+      for (let i = 0; i < 12; i++) { const a = i * Math.PI / 6; p.line(Math.cos(a) * 31, Math.sin(a) * 31, Math.cos(a) * 44, Math.sin(a) * 44, { strokeWidth: .9 }); }
+    },
+    cactus(g, p) {
+      const d = "M-8 42 L-8 -30 Q0 -44 8 -30 L8 42 Z M-8 8 L-22 8 Q-30 8 -30 0 L-30 -18 Q-25 -26 -20 -18 L-20 -4 L-8 -4 M8 -2 L20 -2 L20 -22 Q25 -30 30 -22 L30 2 Q30 10 22 10 L8 10";
+      wash(g, "path", { d: "M-8 42 L-8 -30 Q0 -44 8 -30 L8 42 Z M-30 -18 L-20 -18 L-20 8 L-30 4 Z M20 -22 L30 -22 L30 6 L20 8 Z" }, C.leaf, .6);
+      p.path(d); p.line(0, -34, 0, 40, { strokeWidth: .6 }); p.line(-26, 44, 26, 42);
+      wash(g, "circle", { cx: 2, cy: -38, r: 5, filter: "url(#wcs)" }, C.rose, .95);
+    },
+    footprints(g, p) {
+      const foot = (x, y, r, flip) => {
+        const gg = el("g", { transform: `translate(${x} ${y}) rotate(${r}) scale(${flip ? -1 : 1} 1)` }); g.appendChild(gg);
+        const pp = inkPen(g.ownerSVGElement || g, 13, gg, 1);
+        wash(gg, "path", { d: "M-5 -8 Q-7 6 -4 12 Q0 16 4 12 Q6 4 5 -8 Q2 -14 -2 -14 Q-5 -12 -5 -8 Z" }, C.coffee, .35);
+        pp.path("M-5 -8 Q-7 6 -4 12 Q0 16 4 12 Q6 4 5 -8 Q2 -14 -2 -14 Q-5 -12 -5 -8 Z", { strokeWidth: .8 });
+        [[-5, -19, 3.4], [-1, -21, 3], [3, -20, 2.6], [6, -17, 2.2], [8, -13, 2]].forEach(([a, b, c]) => pp.circle(a, b, c, { strokeWidth: .6 }));
+      };
+      foot(-24, 22, -14, false); foot(-6, 8, -14, true); foot(12, -8, -14, false); foot(30, -22, -14, true);
+    },
+    pyramid(g, p) {
+      wash(g, "path", { d: "M-44 32 L0 -32 L44 32 Z" }, C.sand, .7); wash(g, "path", { d: "M0 -32 L44 32 L14 32 Z" }, C.coffee, .3);
+      p.path("M-44 32 L0 -32 L44 32 Z"); p.line(0, -32, 14, 32);
+      for (let y = -16; y < 32; y += 10) p.line(-44 * (y + 32) / 64 + 2, y, 14 * (y + 32) / 64, y, { strokeWidth: .5, roughness: .6 });
+    },
+    tumbleweed(g, p) {
+      for (let i = 0; i < 5; i++) p.ellipse(0, 0, 44 - i * 4, 36 - i * 2, { strokeWidth: .6, roughness: 2.4, seed: 30 + i });
+      p.line(-30, 22, 30, 22, { strokeWidth: .6 });
+    },
+    vulture(g, p) { p.path("M-34 0 Q-18 -16 0 0 Q18 -16 34 0", { strokeWidth: 1.4 }); p.path("M-14 14 Q-6 4 0 14 Q6 4 14 14", { strokeWidth: 1 }); },
+    // road trip
+    car(g, p) {
+      const d = "M-48 14 L-48 0 Q-44 -8 -30 -10 L-20 -26 Q-14 -32 8 -32 Q24 -32 30 -16 L44 -12 Q50 -10 50 0 L50 14 Z";
+      wash(g, "path", { d }, C.rose, .7); p.path(d);
+      wash(g, "path", { d: "M-16 -12 L-10 -25 L4 -25 L4 -12 Z M10 -12 L10 -25 Q20 -25 24 -12 Z" }, C.sky, .8);
+      p.path("M-16 -12 L-10 -25 L4 -25 L4 -12 Z", { strokeWidth: .8 }); p.path("M10 -12 L10 -25 Q20 -25 24 -12 Z", { strokeWidth: .8 });
+      [-28, 30].forEach((x) => { wash(g, "circle", { cx: x, cy: 16, r: 11 }, C.ink, .5); p.circle(x, 16, 22); p.circle(x, 16, 8); });
+      p.line(44, -2, 50, -2, { strokeWidth: 2 });
+    },
+    palm(g, p) {
+      p.curve([[0, 48], [4, 20], [2, -6], [-4, -30]], { strokeWidth: 1.6 });
+      for (let y = 40; y > -24; y -= 8) p.line(-3 + (40 - y) / 12, y, 5 + (40 - y) / 14, y - 3, { strokeWidth: .6 });
+      [[-44, -18], [-30, -44], [6, -50], [34, -36], [40, -10]].forEach(([x, y]) => {
+        wash(g, "path", { d: `M-4 -30 Q${(x - 4) / 2} ${y - 14} ${x} ${y} Q${(x - 4) / 2} ${y - 2} -4 -30 Z` }, C.leaf, .55);
+        p.path(`M-4 -30 Q${(x - 4) / 2} ${y - 14} ${x} ${y}`, { strokeWidth: 1 });
+      });
+    },
+    road(g, p) {
+      wash(g, "path", { d: "M-50 40 L-6 -30 L6 -30 L50 40 Z" }, C.shade, .25);
+      p.line(-50, 40, -6, -30); p.line(50, 40, 6, -30);
+      [[0, -20, 0, -12], [0, -4, 0, 8], [0, 18, 0, 34]].forEach(([a, b, c, d]) => p.line(a, b, c, d, { strokeWidth: 1.6 }));
+    },
+    cloud(g, p) {
+      const d = "M-36 10 Q-40 -6 -24 -8 Q-20 -24 -2 -20 Q8 -32 22 -18 Q40 -18 36 0 Q44 12 30 14 Z";
+      wash(g, "path", { d }, C.sky, .55); p.path(d, { strokeWidth: .9 });
+    },
+    // swamp
+    croc(g, p) {
+      wash(g, "path", { d: "M-50 12 Q-40 -8 -26 -8 Q-18 -16 -10 -6 Q-2 -12 6 -4 L44 4 Q52 8 46 12 Z" }, C.leaf, .7);
+      p.path("M-50 12 Q-40 -8 -26 -8 Q-18 -16 -10 -6 Q-2 -12 6 -4 L44 4 Q52 8 46 12");
+      p.circle(-26, -8, 9); p.line(-26, -11, -26, -5, { strokeWidth: 1.4 }); p.circle(-10, -6, 8); p.line(-10, -9, -10, -3, { strokeWidth: 1.4 });
+      p.circle(40, 3, 2.5); for (let x = 10; x < 40; x += 7) p.path(`M${x} ${7 - (x - 10) / 10} l3 4 l3 -4`, { strokeWidth: .7, roughness: .4 });
+      p.path("M-56 14 Q-40 10 -24 14 Q-8 18 8 14 Q24 10 40 14 Q50 16 56 14", { stroke: C.water, strokeWidth: 1.2 });
+      p.ellipse(-20, 22, 50, 6, { stroke: C.water, strokeWidth: .7 });
+    },
+    reeds(g, p) {
+      [[-14, 6], [-4, -6], [8, 2], [18, 10]].forEach(([x, dx], i) => {
+        p.curve([[x, 46], [x + dx * .3, 10], [x + dx, -30]], { strokeWidth: 1 });
+        if (i % 2 === 0) { wash(g, "ellipse", { cx: x + dx, cy: -30, rx: 4, ry: 10, filter: "url(#wcs)" }, C.coffee, .9); p.ellipse(x + dx, -30, 8, 20, { strokeWidth: .8 }); }
+        else p.path(leafD(x + dx * .4, 6, -Math.PI / 2 + (dx > 0 ? .5 : -.5), 28), { strokeWidth: .7 });
+      });
+    },
+    lily(g, p) {
+      wash(g, "path", { d: "M0 0 L32 -6 A32 15 0 1 1 28 8 Z" }, C.sage, .8); p.path("M0 0 L32 -6 A32 15 0 1 1 28 8 Z");
+      [[-6, -8], [2, -12], [10, -8], [4, -4]].forEach(([x, y]) => { wash(g, "ellipse", { cx: x, cy: y, rx: 6, ry: 4, filter: "url(#wcs)" }, C.rose, .95); p.ellipse(x, y, 12, 8, { strokeWidth: .6 }); });
+    },
+    dragonfly(g, p) {
+      [[-6, -10, -30], [6, -10, 30], [-8, -4, -10], [8, -4, 10]].forEach(([x, y, r]) => { const gg = el("g", { transform: `translate(${x} ${y}) rotate(${r})` }); g.appendChild(gg); wash(gg, "ellipse", { cx: x > 0 ? 14 : -14, cy: 0, rx: 16, ry: 5 }, C.sky, .7); inkPen(g.ownerSVGElement || g, 5, gg, 1).ellipse(x > 0 ? 14 : -14, 0, 32, 10, { strokeWidth: .7 }); });
+      p.line(0, -16, 0, 34, { strokeWidth: 2 }); p.circle(0, -18, 7, { fill: C.ink, fillStyle: "solid" });
+    },
+    ripple(g, p) { [60, 40, 20].forEach((w) => p.ellipse(0, 0, w, w / 5, { stroke: C.water, strokeWidth: .9 })); },
+    // cinema
+    popcorn(g, p) {
+      for (let i = 0; i < 4; i++) wash(g, "path", { d: `M${-24 + i * 12} -6 L${-12 + i * 12} -6 L${-10.5 + i * 9} 40 L${-18 + i * 9} 40 Z` }, i % 2 ? C.white : C.red, .8);
+      p.path("M-24 -6 L24 -6 L18 40 L-18 40 Z");
+      [[-16, -12], [-4, -18], [8, -14], [18, -10], [-8, -26], [6, -28], [-20, -20], [16, -22]].forEach(([x, y]) => { wash(g, "circle", { cx: x, cy: y, r: 7, filter: "url(#wcs)" }, C.butter, .9); p.circle(x, y, 13, { strokeWidth: .7, roughness: 1.6 }); });
+    },
+    film(g, p) {
+      wash(g, "rect", { x: -50, y: -16, width: 100, height: 32 }, C.ink, .22); p.rect(-50, -16, 100, 32);
+      for (let x = -46; x < 48; x += 10) { p.rect(x, -13, 5, 4, { strokeWidth: .6 }); p.rect(x, 9, 5, 4, { strokeWidth: .6 }); }
+      [-25, 0, 25].forEach((x) => p.line(x, -8, x, 8, { strokeWidth: .7 }));
+    },
+    clapper(g, p) {
+      wash(g, "rect", { x: -30, y: -6, width: 60, height: 40 }, C.ink, .3); p.rect(-30, -6, 60, 40);
+      p.polygon([[-30, -8], [28, -22], [31, -12], [-28, 2]], { fill: C.ink, fillStyle: "zigzag", hachureGap: 6, fillWeight: .7 });
+      p.line(-24, 8, 22, 8, { strokeWidth: .6 }); p.line(-24, 20, 22, 20, { strokeWidth: .6 });
+    },
+    ticket(g, p) {
+      const d = "M-40 -18 L40 -18 L40 -6 Q34 0 40 6 L40 18 L-40 18 L-40 6 Q-34 0 -40 -6 Z";
+      wash(g, "path", { d }, C.rose, .7); p.path(d); p.line(20, -16, 20, 16, { strokeWidth: .7, strokeLineDash: [3, 3] });
+      const gg = el("g", { transform: "translate(-10 0)" }); g.appendChild(gg); inkPen(g.ownerSVGElement || g, 8, gg, 1).path(starD(9, 4), { strokeWidth: .8 });
+    },
+    star(g, p) { wash(g, "path", { d: starD(30, 13) }, C.yolk, .85); p.path(starD(30, 13)); },
+    // party / restaurant
+    cake(g, p) {
+      wash(g, "rect", { x: -34, y: -2, width: 68, height: 32 }, C.blush, .75); p.rect(-34, -2, 68, 32);
+      p.path("M-34 4 Q-28 12 -22 4 Q-16 12 -10 4 Q-4 12 2 4 Q8 12 14 4 Q20 12 26 4 Q30 10 34 4", { strokeWidth: .8 });
+      p.ellipse(0, 32, 84, 10);
+      [-18, 0, 18].forEach((x) => { p.rect(x - 2, -18, 4, 16, { strokeWidth: .7 }); wash(g, "path", { d: `M${x} -32 Q${x - 5} -24 ${x} -20 Q${x + 5} -24 ${x} -32 Z`, filter: "url(#wcs)" }, C.orange, .95); p.path(`M${x} -32 Q${x - 5} -24 ${x} -20 Q${x + 5} -24 ${x} -32 Z`, { strokeWidth: .7 }); });
+    },
+    sparkler(g, p, rnd) {
+      p.line(14, 46, -4, -2, { strokeWidth: 1.2 });
+      wash(g, "circle", { cx: -6, cy: -8, r: 16, filter: "url(#wcs)" }, C.yolk, .7);
+      for (let i = 0; i < 16; i++) { const a = i * Math.PI / 8 + rnd() * .3, r1 = 6, r2 = 18 + rnd() * 18; p.line(-6 + Math.cos(a) * r1, -8 + Math.sin(a) * r1, -6 + Math.cos(a) * r2, -8 + Math.sin(a) * r2, { strokeWidth: .7, roughness: .5 }); }
+    },
+    plate(g, p) {
+      p.circle(0, 0, 66); p.circle(0, 0, 44, { strokeWidth: .7 }); wash(g, "circle", { cx: 0, cy: 0, r: 22 }, C.sky, .35);
+      p.line(-44, -24, -44, 26); [-48, -44, -40].forEach((x) => p.line(x, -24, x, -12, { strokeWidth: .7 }));
+      p.path("M44 -26 Q50 -6 44 4 L44 26");
+    },
+    bunting(g, p) {
+      p.curve([[-50, -24], [-20, -10], [20, -10], [50, -24]], { strokeWidth: .9 });
+      [-38, -20, 0, 20, 38].forEach((x, i) => { const y = -14 - (Math.abs(x) > 30 ? 4 : 0) + (Math.abs(x) < 10 ? 3 : 0); const d = `M${x - 8} ${y} L${x + 8} ${y} L${x} ${y + 18} Z`; wash(g, "path", { d }, [C.rose, C.sky, C.yolk, C.sage, C.lilac][i], .8); p.path(d, { strokeWidth: .8 }); });
+    },
+    wine(g, p) {
+      wash(g, "path", { d: "M-13 -16 L13 -16 Q12 -2 0 0 Q-12 -2 -13 -16 Z" }, C.roseDeep, .55);
+      p.path("M-15 -36 L15 -36 Q16 -2 0 0 Q-16 -2 -15 -36 Z"); p.line(0, 0, 0, 30); p.line(-12, 32, 12, 32);
+    },
+    // everest
+    mountain(g, p) {
+      wash(g, "path", { d: "M-55 40 L-20 -30 L0 -6 L20 -42 L55 40 Z" }, C.sky, .6);
+      wash(g, "path", { d: "M20 -42 L8 -20 L16 -24 L22 -16 L30 -24 Z M-20 -30 L-30 -12 L-22 -16 L-14 -10 Z" }, C.white, .9);
+      p.path("M-55 40 L-20 -30 L0 -6 L20 -42 L55 40"); p.path("M8 -20 L16 -24 L22 -16 L30 -24", { strokeWidth: .8 }); p.path("M-30 -12 L-22 -16 L-14 -10", { strokeWidth: .8 });
+      for (let i = 0; i < 5; i++) p.line(26 + i * 5, -14 + i * 10, 22 + i * 5, -4 + i * 10, { strokeWidth: .5 });
+    },
+    flag(g, p) {
+      wash(g, "path", { d: "M2 -36 L34 -26 L2 -14 Z" }, C.rose, .85); p.line(0, 40, 0, -38, { strokeWidth: 1.3 }); p.path("M2 -36 L34 -26 L2 -14", { strokeWidth: .9 });
+      p.path("M-20 40 Q0 28 20 40", { strokeWidth: .9 });
+    },
+    rope(g, p) {
+      p.curve([[0, -50], [8, -24], [-8, 0], [6, 24], [0, 50]], { strokeWidth: 1.3 });
+      p.curve([[3, -48], [11, -24], [-5, 0], [9, 24], [3, 48]], { strokeWidth: .6 });
+      [[3, -26], [-2, 4], [4, 30]].forEach(([x, y]) => p.ellipse(x, y, 12, 8, { strokeWidth: .9 }));
+    },
+    snowflake(g, p) {
+      for (let i = 0; i < 6; i++) { const a = i * Math.PI / 3, c = Math.cos(a), s = Math.sin(a); p.line(0, 0, c * 30, s * 30, { strokeWidth: 1, roughness: .4 }); [14, 22].forEach((r) => { p.line(c * r, s * r, c * r + Math.cos(a + .7) * 7, s * r + Math.sin(a + .7) * 7, { strokeWidth: .7, roughness: .3 }); p.line(c * r, s * r, c * r + Math.cos(a - .7) * 7, s * r + Math.sin(a - .7) * 7, { strokeWidth: .7, roughness: .3 }); }); }
+    },
+    iceaxe(g, p) {
+      p.line(-26, 40, 18, -34, { strokeWidth: 1.6 }); wash(g, "path", { d: "M2 -40 Q18 -46 36 -30 L22 -32 L8 -26 Z" }, C.shade, .5);
+      p.path("M2 -40 Q18 -46 36 -30 L22 -32 L8 -26 Z"); p.path("M8 -26 L-2 -34 L2 -40", { strokeWidth: .9 });
+    },
+    // treasure
+    chest(g, p) {
+      wash(g, "rect", { x: -34, y: -4, width: 68, height: 36 }, C.amber, .75); wash(g, "path", { d: "M-34 -4 L-34 -16 Q0 -38 34 -16 L34 -4 Z" }, C.syrup, .55);
+      p.rect(-34, -4, 68, 36); p.path("M-34 -4 L-34 -16 Q0 -38 34 -16 L34 -4");
+      [-22, 22].forEach((x) => p.line(x, -26, x, 32, { strokeWidth: .8 })); p.rect(-6, -8, 12, 12, { fill: C.yolk, fillStyle: "solid" });
+      [[-14, -30], [0, -34], [14, -30], [-6, -38], [8, -40]].forEach(([x, y]) => { wash(g, "circle", { cx: x, cy: y, r: 6, filter: "url(#wcs)" }, C.yolk, .95); p.circle(x, y, 11, { strokeWidth: .6 }); });
+    },
+    map(g, p) {
+      const d = "M-40 -28 Q-20 -32 0 -28 Q20 -24 40 -28 L40 28 Q20 32 0 28 Q-20 24 -40 28 Z";
+      wash(g, "path", { d }, C.ochre, .8); p.path(d);
+      p.curve([[-30, 18], [-16, 4], [-4, 14], [10, -2], [22, -14]], { strokeWidth: .9, strokeLineDash: [4, 4] });
+      p.line(18, -20, 28, -10, { stroke: C.roseDeep, strokeWidth: 2 }); p.line(28, -20, 18, -10, { stroke: C.roseDeep, strokeWidth: 2 });
+    },
+    gift(g, p, rnd) {
+      const c = rnd() > .5 ? C.rose : C.lilac;
+      wash(g, "rect", { x: -26, y: -10, width: 52, height: 42 }, c, .75); p.rect(-26, -10, 52, 42); p.rect(-30, -20, 60, 12);
+      p.line(0, -20, 0, 32, { stroke: C.roseDeep, strokeWidth: 2 });
+      p.ellipse(-10, -26, 20, 12, { stroke: C.roseDeep }); p.ellipse(10, -26, 20, 12, { stroke: C.roseDeep });
+    },
+    coins(g, p) {
+      [[0, 18], [0, 10], [0, 2], [20, 18]].forEach(([x, y]) => { wash(g, "ellipse", { cx: x, cy: y, rx: 16, ry: 6 }, C.yolk, .9); p.ellipse(x, y, 32, 12, { strokeWidth: .8 }); });
+      sparkle(p, -22, -14, 7);
+    },
+    question(g, p) {
+      p.path("M-14 -18 Q-14 -38 4 -38 Q22 -38 20 -20 Q18 -8 4 -4 L4 10", { strokeWidth: 2.2, stroke: C.roseDeep });
+      p.circle(4, 24, 6, { fill: C.roseDeep, fillStyle: "solid", stroke: C.roseDeep });
+    },
+    // night
+    moon(g, p) {
+      const d = "M8 -36 A36 36 0 1 0 8 36 A28 28 0 1 1 8 -36 Z";
+      wash(g, "path", { d }, C.yolk, .85); p.path(d); sparkle(p, 30, -26, 5); sparkle(p, 34, 18, 4);
+    },
+    sparkles(g, p) { sparkle(p, -20, -10, 9); sparkle(p, 18, 8, 6); sparkle(p, -4, 26, 4); sparkle(p, 26, -26, 4); },
+    cocktail(g, p) {
+      wash(g, "path", { d: "M-22 -20 L22 -20 L0 4 Z" }, C.rose, .7); p.path("M-28 -26 L28 -26 L0 6 Z"); p.line(0, 6, 0, 32); p.line(-14, 34, 14, 34);
+      p.line(8, -42, -6, -12, { strokeWidth: .8 }); wash(g, "circle", { cx: 6, cy: -36, r: 5, filter: "url(#wcs)" }, C.sage, .95); p.circle(6, -36, 10, { strokeWidth: .7 });
+    },
+    // radio
+    vinyl(g, p) {
+      wash(g, "circle", { cx: 0, cy: 0, r: 44 }, C.ink, .28); p.circle(0, 0, 88); p.circle(0, 0, 70, { strokeWidth: .5 }); p.circle(0, 0, 54, { strokeWidth: .5 });
+      wash(g, "circle", { cx: 0, cy: 0, r: 15 }, C.rose, .85); p.circle(0, 0, 30); p.circle(0, 0, 4, { fill: C.ink, fillStyle: "solid" });
+    },
+    cassette(g, p) {
+      wash(g, "rect", { x: -44, y: -28, width: 88, height: 56 }, C.lilac, .7); p.rect(-44, -28, 88, 56);
+      wash(g, "rect", { x: -26, y: -10, width: 52, height: 18 }, C.white, .9); p.rect(-26, -10, 52, 18, { strokeWidth: .8 });
+      [-13, 13].forEach((x) => { p.circle(x, -1, 14, { strokeWidth: .8 }); }); p.line(-34, -20, 34, -20, { strokeWidth: .6 }); p.path("M-30 28 L-24 16 L24 16 L30 28", { strokeWidth: .8 });
+    },
+    headphones(g, p) {
+      p.path("M-32 12 Q-34 -40 0 -40 Q34 -40 32 12", { strokeWidth: 1.6 });
+      [-32, 32].forEach((x) => { wash(g, "rect", { x: x - 9, y: 2, width: 18, height: 28 }, C.rose, .8); p.rect(x - 9, 2, 18, 28); });
+    },
+    radio(g, p) {
+      wash(g, "rect", { x: -40, y: -18, width: 80, height: 48 }, C.amber, .7); p.rect(-40, -18, 80, 48); p.line(-30, -18, 20, -46, { strokeWidth: 1 });
+      p.circle(-14, 6, 32, { fill: C.ink, fillStyle: "dots", hachureGap: 4, fillWeight: .8 }); p.circle(20, -2, 14); p.rect(10, 12, 22, 8, { strokeWidth: .7 });
+    },
+    // wish
+    shootingstar(g, p) {
+      [[-46, 26, 0], [-50, 14, 8], [-40, 36, -6]].forEach(([x, y]) => p.line(x, y, 14, -8, { strokeWidth: .8, roughness: .5 }));
+      wash(g, "path", { d: "M-46 28 L14 -6 L-40 18 Z" }, C.yolk, .5);
+      const gg = el("g", { transform: "translate(22 -14) rotate(12)" }); g.appendChild(gg);
+      wash(gg, "path", { d: starD(16, 7) }, C.yolk, .95); inkPen(g.ownerSVGElement || g, 2, gg, 1).path(starD(16, 7));
+    },
+    dandelion(g, p, rnd) {
+      p.curve([[0, 50], [-4, 24], [2, 0], [0, -14]], { strokeWidth: 1.1 });
+      for (let i = 0; i < 22; i++) { const a = i * Math.PI * 2 / 22, x = Math.cos(a) * 20, y = -14 + Math.sin(a) * 20; p.line(0, -14, x, y, { strokeWidth: .5, roughness: .4 }); p.circle(x, y, 3, { strokeWidth: .5 }); }
+      [[26, -36], [36, -24], [30, -48]].forEach(([x, y]) => { p.line(x, y, x + 4, y + 8, { strokeWidth: .5 }); p.circle(x, y, 4, { strokeWidth: .5 }); });
+      p.path(leafD(-2, 34, Math.PI + .6, 22), { strokeWidth: .7 });
+    },
+    jar(g, p) {
+      const d = "M-22 -24 L22 -24 L22 -18 Q30 -14 30 0 L30 30 Q30 38 22 38 L-22 38 Q-30 38 -30 30 L-30 0 Q-30 -14 -22 -18 Z";
+      wash(g, "path", { d }, C.sky, .35); p.path(d); p.rect(-24, -32, 48, 8, { fill: C.coffee, fillStyle: "hachure", hachureGap: 3 });
+      [[-12, 4], [8, -6], [14, 16], [-6, 22], [2, 8]].forEach(([x, y]) => { wash(g, "circle", { cx: x, cy: y, r: 6, filter: "url(#wcs)" }, C.yolk, .95); p.circle(x, y, 3, { fill: C.ink, fillStyle: "solid" }); });
+    }
+  };
+
+  /* Backdrops: drawn across the 400×190 banner */
+  const BACK = {
+    table(svg, p) {
+      wash(svg, "rect", { x: 0, y: 150, width: 400, height: 40 }, C.rose, .35);
+      for (let x = 0; x <= 400; x += 20) p.line(x, 150, x - 6, 190, { strokeWidth: .5, roughness: .6, stroke: C.roseDeep });
+      [160, 172, 184].forEach((y) => p.line(0, y, 400, y, { strokeWidth: .5, roughness: .6, stroke: C.roseDeep }));
+      p.line(0, 150, 400, 150, { strokeWidth: 1.2 });
+    },
+    stage(svg, p) {
+      wash(svg, "rect", { x: 0, y: 0, width: 400, height: 70 }, C.lilac, .3);
+      p.curve([[0, 8], [100, 34], [200, 14], [300, 34], [400, 8]], { strokeWidth: .9 });
+      for (let i = 0; i < 16; i++) { const x = 12 + i * 25, y = 8 + 22 * Math.abs(Math.sin((x / 400) * Math.PI * 2)) + 4; wash(svg, "circle", { cx: x, cy: y + 6, r: 5, filter: "url(#wcs)" }, i % 2 ? C.yolk : C.rose, .95); p.ellipse(x, y + 6, 8, 11, { strokeWidth: .7 }); }
+      p.line(0, 176, 400, 176, { strokeWidth: 1 });
+    },
+    dunes(svg, p) {
+      wash(svg, "path", { d: "M0 120 Q90 80 190 118 Q290 150 400 110 L400 190 L0 190 Z" }, C.sand, .75);
+      wash(svg, "path", { d: "M0 160 Q120 124 240 156 Q320 176 400 150 L400 190 L0 190 Z" }, C.orange, .35);
+      p.path("M0 120 Q90 80 190 118 Q290 150 400 110"); p.path("M0 160 Q120 124 240 156 Q320 176 400 150", { strokeWidth: .9 });
+    },
+    road(svg, p) {
+      wash(svg, "rect", { x: 0, y: 0, width: 400, height: 110 }, C.sky, .35);
+      wash(svg, "path", { d: "M0 110 L400 110 L400 190 L0 190 Z" }, C.sage, .45);
+      wash(svg, "path", { d: "M120 190 L192 110 L208 110 L280 190 Z" }, C.shade, .35);
+      p.line(0, 110, 400, 110); p.line(120, 190, 192, 110); p.line(280, 190, 208, 110);
+      [[200, 118, 200, 126], [200, 136, 200, 150], [200, 162, 200, 184]].forEach(([a, b, c, d]) => p.line(a, b, c, d, { strokeWidth: 2 }));
+    },
+    water(svg, p) {
+      wash(svg, "path", { d: "M0 128 Q100 118 200 128 Q300 138 400 126 L400 190 L0 190 Z" }, C.water, .6);
+      [128, 150, 170].forEach((y, i) => p.path(`M0 ${y} Q100 ${y - 8} 200 ${y} Q300 ${y + 8} 400 ${y - 2}`, { stroke: C.leaf, strokeWidth: i ? .6 : 1 }));
+    },
+    curtain(svg, p) {
+      wash(svg, "path", { d: "M0 0 L60 0 Q50 80 70 190 L0 190 Z" }, C.red, .55); wash(svg, "path", { d: "M400 0 L340 0 Q350 80 330 190 L400 190 Z" }, C.red, .55);
+      wash(svg, "rect", { x: 0, y: 0, width: 400, height: 22 }, C.roseDeep, .5);
+      p.path("M0 0 L60 0 Q50 80 70 190"); p.path("M400 0 L340 0 Q350 80 330 190");
+      for (let x = 0; x < 400; x += 25) p.path(`M${x} 22 Q${x + 12.5} 34 ${x + 25} 22`, { strokeWidth: .9 });
+      [12, 26, 44].forEach((x) => p.line(x, 4, x + 8, 186, { strokeWidth: .5 })); [388, 374, 356].forEach((x) => p.line(x, 4, x - 8, 186, { strokeWidth: .5 }));
+    },
+    bunting(svg, p) {
+      p.curve([[0, 10], [100, 40], [200, 22], [300, 40], [400, 10]], { strokeWidth: .9 });
+      const cols = [C.rose, C.sky, C.yolk, C.sage, C.lilac];
+      for (let i = 0; i < 14; i++) { const x = 16 + i * 28, y = 12 + 24 * Math.abs(Math.sin((x / 400) * Math.PI * 2)) + 2; const d = `M${x - 9} ${y} L${x + 9} ${y} L${x} ${y + 20} Z`; wash(svg, "path", { d }, cols[i % 5], .8); p.path(d, { strokeWidth: .8 }); }
+      wash(svg, "rect", { x: 0, y: 168, width: 400, height: 22 }, C.blush, .45); p.line(0, 168, 400, 168);
+    },
+    peaks(svg, p) {
+      wash(svg, "path", { d: "M0 190 L0 150 L70 90 L120 130 L205 30 L290 120 L340 84 L400 140 L400 190 Z" }, C.sky, .55);
+      wash(svg, "path", { d: "M205 30 L178 64 L192 58 L204 72 L218 58 L232 66 Z M70 90 L56 104 L68 100 L80 108 Z M340 84 L326 98 L338 94 L350 102 Z" }, C.white, .95);
+      p.path("M0 150 L70 90 L120 130 L205 30 L290 120 L340 84 L400 140");
+      p.path("M178 64 L192 58 L204 72 L218 58 L232 66", { strokeWidth: .8 });
+      for (let i = 0; i < 9; i++) p.line(222 + i * 7, 46 + i * 9, 216 + i * 7, 58 + i * 9, { strokeWidth: .5 });
+    },
+    island(svg, p) {
+      wash(svg, "path", { d: "M0 140 Q200 128 400 140 L400 190 L0 190 Z" }, C.water, .55);
+      wash(svg, "path", { d: "M60 160 Q200 118 340 160 Z" }, C.sand, .85);
+      p.path("M60 160 Q200 118 340 160"); [148, 172].forEach((y) => p.path(`M0 ${y} Q100 ${y - 6} 200 ${y} Q300 ${y + 6} 400 ${y}`, { stroke: C.leaf, strokeWidth: .6 }));
+    },
+    skyline(svg, p, rnd) {
+      wash(svg, "rect", { x: 0, y: 0, width: 400, height: 190 }, C.night, .28);
+      let x = 0;
+      while (x < 400) {
+        const w = 30 + rnd() * 34, h = 40 + rnd() * 60, y = 190 - h;
+        wash(svg, "rect", { x, y, width: w, height: h }, C.ink, .22); p.rect(x, y, w, h, { strokeWidth: .8 });
+        for (let wy = y + 8; wy < 182; wy += 14) for (let wx = x + 6; wx < x + w - 8; wx += 12) if (rnd() > .45) { wash(svg, "rect", { x: wx, y: wy, width: 6, height: 7, filter: "url(#wcs)" }, C.yolk, .95); }
+        x += w + 2;
+      }
+    },
+    dusk(svg, p) {
+      wash(svg, "rect", { x: 0, y: 0, width: 400, height: 150 }, C.lilac, .35);
+      wash(svg, "path", { d: "M0 150 Q100 120 200 146 Q300 170 400 136 L400 190 L0 190 Z" }, C.sage, .6);
+      p.path("M0 150 Q100 120 200 146 Q300 170 400 136");
+    },
+    none() {}
+  };
+
+  const SCENES = {
+    breakfast: { tint: "#F6E3CF", back: "table", wall: ["cup", "croissant", "pancakes", "toast", "egg", "orange", "strawberry"],
+      banner: [["cup", 82, 112, 1, -4], ["croissant", 200, 128, .95, 6], ["pancakes", 316, 108, 1, 0], ["strawberry", 26, 150, .5, -15], ["orange", 376, 156, .55, 0], ["egg", 150, 56, .55, 12], ["toast", 262, 48, .5, -10]] },
+    dj: { tint: "#E9E0F1", back: "stage", wall: ["mic", "speaker", "disco", "note", "notes", "lights", "flutes", "weddingcake"],
+      banner: [["speaker", 44, 128, .95, 0], ["mic", 134, 128, .9, -12], ["disco", 214, 82, .8, 0], ["weddingcake", 300, 128, .9, 0], ["note", 370, 84, .55, 10], ["notes", 112, 60, .45, -10]] },
+    desert: { tint: "#F4E2BE", back: "dunes", wall: ["cactus", "footprints", "sun", "pyramid", "tumbleweed", "vulture"],
+      banner: [["sun", 330, 46, .8, 0], ["cactus", 64, 104, 1, 0], ["pyramid", 248, 104, .75, 0], ["footprints", 168, 152, .75, 30], ["vulture", 130, 36, .5, 0], ["vulture", 190, 54, .35, 8], ["tumbleweed", 360, 156, .45, 0]] },
+    road: { tint: "#DFEBF1", back: "road", wall: ["car", "palm", "cloud", "note", "road"],
+      banner: [["car", 200, 150, .9, 0], ["palm", 52, 100, 1, 0], ["palm", 352, 104, .9, 4], ["cloud", 124, 38, .7, 0], ["cloud", 288, 30, .6, 0], ["note", 262, 92, .35, 14]] },
+    swamp: { tint: "#DCE8D3", back: "water", wall: ["croc", "reeds", "lily", "dragonfly", "ripple"],
+      banner: [["croc", 128, 136, 1.1, 0], ["croc", 300, 148, .75, 0], ["reeds", 28, 106, 1, 0], ["reeds", 380, 100, .9, 0], ["lily", 224, 168, .55, 0], ["dragonfly", 258, 56, .7, -14]] },
+    cinema: { tint: "#F2DADA", back: "curtain", wall: ["popcorn", "film", "clapper", "ticket", "star"],
+      banner: [["popcorn", 120, 128, .9, -4], ["clapper", 210, 124, .85, -6], ["ticket", 292, 142, .75, 8], ["star", 166, 62, .38, 0], ["star", 252, 54, .32, 10], ["film", 210, 52, .55, -8]] },
+    party: { tint: "#F6DDE1", back: "bunting", wall: ["cake", "sparkler", "plate", "wine", "bunting"],
+      banner: [["cake", 200, 126, 1.05, 0], ["sparkler", 122, 96, .8, -18], ["sparkler", 280, 96, .8, 18], ["plate", 56, 146, .7, 0], ["wine", 352, 134, .85, 0]] },
+    everest: { tint: "#E2EDF4", back: "peaks", wall: ["mountain", "flag", "snowflake", "rope", "iceaxe"],
+      banner: [["flag", 210, 14, .55, 0], ["rope", 330, 120, .7, 0], ["snowflake", 56, 40, .4, 0], ["snowflake", 372, 36, .34, 20], ["iceaxe", 92, 150, .55, -20], ["snowflake", 140, 30, .25, 10]] },
+    treasure: { tint: "#F2E6CB", back: "island", wall: ["chest", "map", "gift", "coins", "question"],
+      banner: [["chest", 200, 120, 1, 0], ["map", 74, 104, .8, -8], ["gift", 320, 118, .75, 6], ["coins", 266, 150, .45, 0], ["question", 136, 46, .5, -8], ["palm", 380, 92, .7, 0]] },
+    night: { tint: "#DCDFEE", back: "skyline", wall: ["moon", "star", "sparkles", "cocktail", "lights"],
+      banner: [["moon", 324, 46, .75, 0], ["cocktail", 92, 56, .55, -8], ["sparkles", 52, 26, .6, 0], ["sparkles", 210, 28, .5, 0], ["star", 160, 44, .26, 0], ["star", 262, 64, .22, 0]] },
+    radio: { tint: "#EADFEA", back: "none", wall: ["vinyl", "cassette", "headphones", "note", "notes", "radio"],
+      banner: [["vinyl", 86, 104, 1, 0], ["cassette", 214, 116, .9, -6], ["headphones", 330, 104, .9, 0], ["note", 162, 40, .45, -10], ["notes", 290, 34, .4, 8], ["radio", 380, 160, .35, 0]] },
+    wish: { tint: "#E5E0F0", back: "dusk", wall: ["shootingstar", "dandelion", "jar", "star", "sparkles"],
+      banner: [["shootingstar", 250, 48, 1, 0], ["dandelion", 90, 108, 1, 0], ["jar", 324, 128, .75, 0], ["star", 150, 36, .3, 0], ["sparkles", 372, 40, .5, 0], ["star", 46, 30, .22, 0]] }
+  };
+
+  function drawMotif(root, parent, name, x, y, s, r, seed) {
+    if (!M[name]) return;
+    const g = el("g", { transform: `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${(r || 0).toFixed(1)}) scale(${s.toFixed(3)})` });
+    parent.appendChild(g);
+    M[name](g, inkPen(root, seed, g, s), prng(seed));
+  }
+
+  function drawBanner(name) {
+    const svg = document.getElementById("banner"), sc = SCENES[name];
+    svg.textContent = "";
+    const rnd = prng(name.length * 97 + 3);
+    BACK[sc.back](svg, inkPen(svg, 17), rnd);
+    sc.banner.forEach(([m, x, y, s, r], i) => drawMotif(svg, svg, m, x, y, s, r, 40 + i * 7));
+  }
+
+  let wallName = "";
+  function drawWall(name, force) {
+    const svg = document.getElementById("scene");
+    if (!name) { svg.setAttribute("hidden", ""); wallName = ""; return; }
+    svg.removeAttribute("hidden");
+    if (name === wallName && !force) return;
+    wallName = name;
+    const sc = SCENES[name], w = Math.max(320, window.innerWidth), h = Math.max(480, window.innerHeight);
+    svg.setAttribute("viewBox", `0 0 ${w} ${h}`); svg.setAttribute("preserveAspectRatio", "xMidYMid slice");
+    svg.textContent = "";
+    svg.appendChild(el("rect", { x: 0, y: 0, width: w, height: h, fill: sc.tint, opacity: .75 }));
+    const g = el("g", { opacity: .5 }); svg.appendChild(g);
+    LITE = true;
+    const rnd = prng(name.length * 131 + 7), cell = Math.max(118, Math.min(170, w / 8));
+    let i = 0;
+    for (let y = cell * .45; y < h + 20; y += cell * .9) {
+      const off = (Math.round(y / cell) % 2) * cell * .5;
+      for (let x = -cell * .2 + off; x < w + 20; x += cell) {
+        const m = sc.wall[Math.floor(rnd() * sc.wall.length)];
+        drawMotif(svg, g, m, x + (rnd() - .5) * cell * .35, y + (rnd() - .5) * cell * .3, .42 + rnd() * .2, (rnd() - .5) * 40, 200 + i++);
+      }
+    }
+    LITE = false;
+  }
+
+  /* --- cover, windows, vine, bouquet (unchanged look) --- */
+  function drawCover(svg) {
+    const rnd = prng(11);
+    wash(svg, "ellipse", { cx: 190, cy: 118, rx: 182, ry: 118 }, C.sky, 0.45);
+    wash(svg, "path", { d: "M66 88 L294 88 L298 418 L62 418 Z" }, C.ochre, 0.55);
+    wash(svg, "rect", { x: 66, y: 94, width: 228, height: 16 }, C.shade, 0.22);
+    wash(svg, "path", { d: "M140 300 L140 202 A40 40 0 0 1 220 202 L220 300 Z" }, C.glass, 0.55);
+    wash(svg, "path", { d: "M90 226 L90 176 A14 14 0 0 1 118 176 L118 226 Z" }, C.glass, 0.45);
+    wash(svg, "path", { d: "M242 226 L242 176 A14 14 0 0 1 270 176 L270 226 Z" }, C.glass, 0.45);
+    wash(svg, "path", { d: "M150 418 L150 384 A30 30 0 0 1 210 384 L210 418 Z" }, C.shade, 0.3);
+    wash(svg, "rect", { x: 270, y: 110, width: 24, height: 300 }, C.shade, 0.12);
+    [[66, 396, 44, 30], [54, 348, 26, 42], [80, 300, 22, 32], [94, 254, 20, 26], [104, 214, 16, 20], [40, 410, 30, 16]].forEach(([x, y, a, b]) => wash(svg, "ellipse", { cx: x, cy: y, rx: a, ry: b }, C.sage, 0.6));
+    [[302, 40, 62, 26], [252, 80, 34, 16], [342, 92, 26, 40], [280, 22, 40, 16]].forEach(([x, y, a, b]) => wash(svg, "ellipse", { cx: x, cy: y, rx: a, ry: b }, C.leaf, 0.42));
+    wash(svg, "ellipse", { cx: 180, cy: 296, rx: 70, ry: 13 }, C.sage, 0.55);
+
+    const p = inkPen(svg, 7);
+    const pinks = [[126, 294], [142, 288], [158, 296], [174, 286], [192, 294], [208, 288], [226, 296], [234, 310], [120, 312], [130, 324], [228, 326], [64, 330], [76, 294], [88, 262], [100, 232], [52, 372], [86, 388], [108, 206], [46, 404], [280, 50], [304, 28], [322, 62], [262, 76], [340, 40], [292, 70]];
+    for (let i = 0; i < 26; i++) pinks.push([116 + rnd() * 128, 286 + rnd() * 44 + (i % 4 === 0 ? 20 : 0)]);
+    for (let i = 0; i < 18; i++) { const t = rnd(); pinks.push([40 + t * 72 + (rnd() - .5) * 26, 414 - t * 210 + (rnd() - .5) * 10]); }
+    for (let i = 0; i < 12; i++) pinks.push([252 + rnd() * 104, 14 + rnd() * 82]);
+    pinks.forEach(([x, y], i) => blossom(svg, p, rnd, x, y, i % 7 === 3 ? C.lilac : i % 3 === 0 ? C.blush : C.rose, 7));
+    if (p === NOP) return;
+
+    p.line(70, 96, 66, 418); p.line(290, 96, 294, 418);
+    p.line(52, 76, 308, 76, { strokeWidth: 1.4 });
+    p.rect(60, 80, 240, 12, { roughness: 1 });
+    for (let x = 66; x < 292; x += 10) p.rect(x, 93, 5, 6, { roughness: .6, strokeWidth: .8 });
+    for (let x = 58; x < 302; x += 14) p.path(`M${x} 76 Q${x + 7} 62 ${x + 14} 76`, { strokeWidth: .9, roughness: .8 });
+    for (let y = 112; y < 410; y += 22) { p.rect(70, y, 14, 10, { roughness: .8, strokeWidth: .8 }); p.rect(276, y + 11, 14, 10, { roughness: .8, strokeWidth: .8 }); }
+    p.path("M134 300 L134 200 A46 46 0 0 1 226 200 L226 300", { strokeWidth: 1.4 });
+    p.path("M140 300 L140 202 A40 40 0 0 1 220 202 L220 300", { strokeWidth: .9 });
+    p.path("M175 150 L185 150 L183 163 L177 163 Z", { fill: C.ochre, fillStyle: "solid" });
+    p.line(180, 163, 180, 300, { strokeWidth: .9 });
+    [212, 240, 270].forEach((y) => p.line(141, y, 219, y, { strokeWidth: .8 }));
+    p.line(114, 284, 246, 284, { strokeWidth: 1.3 }); p.line(114, 288, 246, 288);
+    for (let x = 120; x <= 240; x += 10) p.line(x, 288, x, 312, { strokeWidth: .9 });
+    p.rect(110, 312, 140, 9, { fill: C.ochre, fillStyle: "hachure", hachureGap: 4, roughness: 1 });
+    p.path("M122 321 Q126 338 140 321"); p.path("M220 321 Q234 338 238 321");
+    [[90, 118], [242, 270]].forEach(([a, b]) => {
+      const r = (b - a) / 2;
+      p.path(`M${a} 228 L${a} 176 A${r} ${r} 0 0 1 ${b} 176 L${b} 228`, { strokeWidth: 1.2 });
+      for (let y = 182; y < 226; y += 6) p.line(a + 2, y, b - 2, y, { strokeWidth: .6, roughness: .7 });
+      p.rect(a - 5, 228, b - a + 10, 5, { roughness: .8 });
+    });
+    p.line(66, 352, 294, 352, { strokeWidth: 1.2 }); p.line(66, 357, 294, 357, { strokeWidth: .8 });
+    p.path("M150 418 L150 384 A30 30 0 0 1 210 384 L210 418", { strokeWidth: 1.3 });
+    p.line(180, 356, 180, 418, { strokeWidth: .8 });
+    for (let y = 120; y < 340; y += 26) for (let k = 0; k < 4; k++) p.line(276 + k * 4, y + 14, 282 + k * 4, y + 4, { strokeWidth: .6, roughness: .6 });
+    p.curve([[36, 420], [58, 384], [52, 342], [76, 302], [88, 264], [100, 226], [112, 198]], { strokeWidth: 1.5 });
+    p.curve([[58, 384], [84, 372], [102, 382]], { strokeWidth: 1 });
+    p.curve([[76, 302], [98, 296], [114, 302]], { strokeWidth: 1 });
+    for (let i = 0; i < 16; i++) { const t = i / 15, x = 40 + t * 70 + (rnd() - .5) * 10, y = 414 - t * 212; p.path(leafD(x, y, -Math.PI / 2 + (i % 2 ? 0.9 : -0.9) + (rnd() - .5) * .4, 11 + rnd() * 5), { strokeWidth: .8, roughness: .7 }); }
+    p.curve([[362, 10], [330, 30], [296, 52], [252, 82]], { strokeWidth: 1.6 });
+    p.curve([[330, 30], [338, 60], [344, 96]], { strokeWidth: 1 });
+    p.curve([[300, 50], [292, 26], [272, 14]], { strokeWidth: 1 });
+    for (let i = 0; i < 14; i++) { const x = 256 + rnd() * 100, y = 12 + rnd() * 84; p.path(leafD(x, y, rnd() * Math.PI * 2, 10 + rnd() * 6), { strokeWidth: .8, roughness: .7 }); }
+    for (let i = 0; i < 12; i++) p.path(leafD(116 + i * 11, 300 + (i % 2) * 8, Math.PI / 2 + (rnd() - .5), 9 + rnd() * 5), { strokeWidth: .7, roughness: .6 });
+    p.line(20, 419, 340, 418, { strokeWidth: 1.2 });
+    for (let x = 24; x < 340; x += 9 + rnd() * 10) p.line(x, 419, x + 2 + rnd() * 3, 410 - rnd() * 6, { strokeWidth: .6, roughness: .5 });
+  }
+
+  function drawWindow(svg, seed, flower) {
+    const rnd = prng(seed);
+    wash(svg, "ellipse", { cx: 60, cy: 78, rx: 54, ry: 70 }, C.ochre, 0.5);
+    wash(svg, "path", { d: "M32 118 L32 62 A28 28 0 0 1 88 62 L88 118 Z" }, C.glass, 0.5);
+    const p = inkPen(svg, seed);
+    [[40, 128], [52, 122], [64, 126], [78, 121], [88, 128], [30, 132], [70, 134]].forEach(([x, y]) => blossom(svg, p, rnd, x, y, flower, 7));
+    p.path("M28 120 L28 60 A32 32 0 0 1 92 60 L92 120", { strokeWidth: 1.3 });
+    p.path("M33 120 L33 62 A27 27 0 0 1 87 62 L87 120", { strokeWidth: .8 });
+    p.line(60, 35, 60, 120, { strokeWidth: .9 });
+    for (let y = 58; y < 118; y += 7) { p.line(35, y, 58, y, { strokeWidth: .6, roughness: .6 }); p.line(62, y, 85, y, { strokeWidth: .6, roughness: .6 }); }
+    p.path("M60 92 C57 87 52 90 55 94 L60 99 L65 94 C68 90 63 87 60 92 Z", { stroke: C.roseDeep, fill: C.rose, fillStyle: "solid", strokeWidth: 1, roughness: .5 });
+    p.rect(20, 120, 80, 6, { roughness: .8 });
+    p.path("M42 126 L78 126 L74 146 L46 146 Z", { fill: C.ochre, fillStyle: "hachure", hachureGap: 3.5, roughness: .9 });
+    for (let i = 0; i < 7; i++) p.path(leafD(36 + i * 8, 130, Math.PI / 2 + (rnd() - .5) * 1.2, 8 + rnd() * 4), { strokeWidth: .7, roughness: .5 });
+  }
+
+  function drawSprig(svg, seed) {
+    const rnd = prng(seed);
+    [[24, 20], [176, 20]].forEach(([x, y]) => wash(svg, "circle", { cx: x, cy: y, r: 6 }, C.rose, 0.7));
+    const p = inkPen(svg, seed);
+    p.curve([[18, 22], [60, 16], [100, 24], [140, 16], [182, 20]], { strokeWidth: 1 });
+    for (let i = 0; i < 9; i++) { const x = 40 + i * 15; p.path(leafD(x, 20 + (i % 2 ? 1 : -1), (i % 2 ? 1 : -1) * 0.9 - (rnd() * .3), 9 + rnd() * 3), { strokeWidth: .7, roughness: .6 }); }
+    p.circle(24, 20, 5, { strokeWidth: .7 }); p.circle(176, 20, 5, { strokeWidth: .7 });
+  }
+
+  function drawVine(svg) {
+    inkPen(svg, 21).curve([[4, 30], [40, 26], [80, 32], [120, 25], [160, 32], [200, 25], [240, 32], [280, 25], [336, 29]], { strokeWidth: 1.1 });
+    for (let i = 0; i < Q.length; i++) {
+      const x = 18 + i * 27.5, up = i % 2 === 0;
+      svg.appendChild(el("path", { d: leafD(x, 29, up ? -1.05 : 1.05, 17), class: "lf", id: "lf-" + i }));
+    }
+  }
+
+  function drawBouquet(svg) {
+    const rnd = prng(33);
+    const heads = [[100, 52, C.rose], [70, 70, C.rose], [132, 70, C.lilac], [86, 38, C.lilac], [118, 34, C.rose], [56, 100, C.sage], [146, 100, C.sage]];
+    heads.forEach(([x, y, c]) => wash(svg, "circle", { cx: x, cy: y, r: c === C.sage ? 12 : 16 }, c, 0.7));
+    wash(svg, "path", { d: "M84 150 L116 150 L112 168 L88 168 Z" }, C.rose, 0.6);
+    const p = inkPen(svg, 33);
+    heads.forEach(([x, y]) => p.curve([[x, y + 10], [x + (100 - x) * .5, (y + 160) / 2], [100, 160], [100 + (rnd() - .5) * 8, 200]], { strokeWidth: .9 }));
+    heads.slice(0, 5).forEach(([x, y]) => p.path(`M${x} ${y} m-2 0 a2 2 0 1 1 4 0 a5 5 0 1 1 -9 1 a8 8 0 1 1 15 -2`, { strokeWidth: .9, roughness: .7 }));
+    for (let i = 0; i < 10; i++) { const y = 100 + i * 7; p.path(leafD(100 + (i % 2 ? 4 : -4), y, (i % 2 ? -0.5 : Math.PI + 0.5), 14 + rnd() * 6), { strokeWidth: .8, roughness: .6 }); }
+    p.path("M100 158 C86 146 74 154 88 162 C78 172 90 176 100 160 C110 176 122 172 112 162 C126 154 114 146 100 158", { stroke: C.roseDeep, strokeWidth: 1.1, roughness: .6 });
+  }
+
+  /* ================= glitch ================= */
+  const GL = "▓▒░█#@%&$¥§¤Ø∆¿¡*+=<>/\\|ʘΞΨЖ₪⌘◊";
+  function glitchTick() {
+    document.querySelectorAll(".glitch").forEach((g) => {
+      const n = +g.dataset.len || 12; let s = "";
+      for (let i = 0; i < n; i++) s += Math.random() < .1 ? " " : GL[Math.floor(Math.random() * GL.length)];
+      g.textContent = s;
+    });
+  }
+
+  /* ================= app ================= */
+  const $ = (s) => document.querySelector(s);
+  let st = { view: "sobre", opened: false, step: 0, a: {}, done: false };
+
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
+  function load() { try { const raw = localStorage.getItem(KEY); if (raw) st = Object.assign(st, JSON.parse(raw)); } catch (e) {} }
+
+  function show(view) {
+    ["sobre", "carta", "ficha", "fin"].forEach((v) => { $("#v-" + v).hidden = v !== view; });
+    if (view !== "ficha") drawWall(null);
+    st.view = view; save();
+    window.scrollTo(0, 0);
+  }
+
+  function petals() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const rnd = Math.random;
+    for (let i = 0; i < 26; i++) {
+      const p = document.createElement("span"); p.className = "petal";
+      p.style.left = (rnd() * 100) + "vw";
+      p.style.setProperty("--d", (2.6 + rnd() * 1.8) + "s");
+      p.style.setProperty("--delay", (rnd() * .9) + "s");
+      p.style.setProperty("--dx", ((rnd() - .5) * 160) + "px");
+      p.style.setProperty("--r", ((rnd() - .5) * 900) + "deg");
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 5000);
+    }
+  }
+
+  function openLetter() {
+    const seal = $("#seal");
+    if (seal.classList.contains("broken")) return;
+    seal.classList.add("broken");
+    st.opened = true; save();
+    petals();
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setTimeout(() => show("carta"), reduce ? 0 : 1300);
+  }
+
+  const CIRC = '<svg class="circ" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M22 9 C70 2 230 3 284 14 C300 20 298 44 270 52 C210 60 70 59 24 50 C2 45 2 20 20 12 C40 5 70 4 96 5"/></svg>';
+
+  function otherText(q) { return (st.a[q.id + "_otro"] || "").trim(); }
+  function answered(q) {
+    const v = st.a[q.id];
+    if (q.type === "one") return typeof v === "number" && (v < q.opts.length || !!otherText(q));
+    if (q.type === "multi") return !!v && ((v.sel && v.sel.length) || (v.otra && v.otra.trim()));
+    return true;
+  }
+  function filled(q) { const v = st.a[q.id]; return q.type === "text" ? !!(v && v.trim()) : !!answered(q); }
+
+  function renderVine() {
+    Q.forEach((q, k) => {
+      const lf = document.getElementById("lf-" + k);
+      if (lf) lf.setAttribute("class", "lf" + (k === st.step ? " now" : filled(q) ? " done" : ""));
+    });
+  }
+
+  let advanceTimer = 0;
+  function renderQ() {
+    const i = st.step, q = Q[i];
+    $("#qcount").textContent = "prueba " + (i + 1) + " de " + Q.length;
+    $("#qtitle").textContent = q.title;
+    $("#qintro").textContent = q.intro;
+    try { drawBanner(q.scene); drawWall(q.scene); } catch (e) {}
+    renderVine();
+
+    const box = $("#qbox"); box.textContent = "";
+    const wrap = document.createElement("div"); wrap.className = "qfade";
+    const h = document.createElement("h3"); h.className = "q"; h.id = "q-" + q.id; h.textContent = q.q; wrap.appendChild(h);
+    if (q.hint) { const p = document.createElement("p"); p.className = "q-hint"; p.textContent = q.hint; wrap.appendChild(p); }
+
+    if (q.type === "one") {
+      const list = document.createElement("div"); list.className = "opts"; list.setAttribute("role", "group"); list.setAttribute("aria-labelledby", h.id);
+      const items = q.opts.map((o) => o.t);
+      if (q.other) items.push("Otra cosa…");
+      let otherWrap = null;
+      items.forEach((text, idx) => {
+        const isOther = q.other && idx === q.opts.length;
+        const b = document.createElement("button"); b.className = "opt"; b.type = "button"; b.id = "opt-" + q.id + "-" + idx;
+        b.setAttribute("aria-pressed", st.a[q.id] === idx ? "true" : "false");
+        const k = document.createElement("span"); k.className = "k"; k.textContent = "abcde"[idx] + ".";
+        const t = document.createElement("span"); t.textContent = text;
+        b.append(k, t); b.insertAdjacentHTML("beforeend", CIRC);
+        b.addEventListener("click", () => {
+          st.a[q.id] = idx; save();
+          list.querySelectorAll(".opt").forEach((x) => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+          clearTimeout(advanceTimer);
+          if (otherWrap) otherWrap.hidden = !isOther;
+          updateNav(); renderVine();
+          if (isOther) { const inp = otherWrap.querySelector("input"); inp.focus(); return; }
+          const at = st.step;
+          advanceTimer = setTimeout(() => { if (st.step === at && !$("#v-ficha").hidden) go(at + 1); }, 650);
+        });
+        list.appendChild(b);
+        if (isOther) {
+          otherWrap = document.createElement("div"); otherWrap.className = "other-wrap"; otherWrap.hidden = st.a[q.id] !== idx;
+          const inp = document.createElement("input"); inp.className = "under"; inp.id = "otro-" + q.id; inp.placeholder = "cuéntamelo aquí…"; inp.value = st.a[q.id + "_otro"] || "";
+          inp.setAttribute("aria-label", "Otra respuesta");
+          inp.addEventListener("input", () => { st.a[q.id + "_otro"] = inp.value; save(); updateNav(); renderVine(); });
+          inp.addEventListener("keydown", (e) => { if (e.key === "Enter" && answered(q)) go(st.step + 1); });
+          otherWrap.appendChild(inp); list.appendChild(otherWrap);
+        }
+      });
+      wrap.appendChild(list);
+    } else if (q.type === "multi") {
+      const v = st.a[q.id] || { sel: [], otra: "" }; st.a[q.id] = v;
+      const chips = document.createElement("div"); chips.className = "chips"; chips.setAttribute("role", "group"); chips.setAttribute("aria-labelledby", h.id);
+      q.opts.forEach((name, idx) => {
+        const c = document.createElement("button"); c.type = "button"; c.className = "chip"; c.id = "chip-" + idx;
+        const t = document.createElement("span"); t.textContent = name; c.appendChild(t); c.insertAdjacentHTML("beforeend", CIRC);
+        c.setAttribute("aria-pressed", v.sel.includes(name) ? "true" : "false");
+        c.addEventListener("click", () => {
+          const on = v.sel.includes(name);
+          v.sel = on ? v.sel.filter((x) => x !== name) : v.sel.concat(name);
+          c.setAttribute("aria-pressed", on ? "false" : "true");
+          save(); updateNav(); renderVine();
+        });
+        chips.appendChild(c);
+      });
+      const other = document.createElement("input"); other.className = "under"; other.id = "fruta-otra"; other.placeholder = "otra que no está aquí…"; other.value = v.otra || "";
+      other.setAttribute("aria-label", "Otra fruta");
+      other.addEventListener("input", () => { v.otra = other.value; save(); updateNav(); renderVine(); });
+      wrap.append(chips, other);
+    } else {
+      const ta = document.createElement("textarea"); ta.className = "lined"; ta.id = "txt-" + q.id; ta.placeholder = q.ph || ""; ta.value = st.a[q.id] || "";
+      ta.setAttribute("aria-labelledby", h.id);
+      ta.addEventListener("input", () => { st.a[q.id] = ta.value; save(); renderVine(); });
+      wrap.appendChild(ta);
+    }
+    box.appendChild(wrap);
+    updateNav();
+  }
+
+  function updateNav() {
+    const next = $("#next");
+    next.textContent = st.step === Q.length - 1 ? "Terminar la prueba" : "Siguiente";
+    next.disabled = !answered(Q[st.step]);
+  }
+
+  function go(n) {
+    clearTimeout(advanceTimer);
+    if (n >= Q.length) return finish();
+    st.step = Math.max(0, n); save(); renderQ(); window.scrollTo(0, 0);
+  }
+
+  function scores() {
+    let s = 0, f = 0;
+    Q.forEach((q) => { const v = st.a[q.id]; if (q.type === "one" && typeof v === "number" && q.opts[v]) { s += q.opts[v].s || 0; f += q.opts[v].f || 0; } });
+    return { s, f };
+  }
+  function tipo() { const { s } = scores(); return s >= 3 ? TIPOS[0] : s >= 0 ? TIPOS[1] : TIPOS[2]; }
+  function answerText(q) {
+    const v = st.a[q.id];
+    if (q.type === "one") { if (typeof v !== "number") return "—"; return q.opts[v] ? q.opts[v].t : (otherText(q) || "—"); }
+    if (q.type === "multi") { const parts = (v && v.sel ? v.sel.slice() : []); if (v && v.otra && v.otra.trim()) parts.push(v.otra.trim()); return parts.length ? parts.join(", ") : "—"; }
+    return v && v.trim() ? v.trim().replace(/\n+/g, " / ") : "—";
+  }
+  function fichaText() {
+    return "Mi ficha de cumpleañera 🌸\nTipo: " + tipo().n + "\n\n" + Q.map((q) => "• " + q.label + ": " + answerText(q)).join("\n");
+  }
+
+  function finish() {
+    st.done = true; save();
+    const t = tipo();
+    $("#tipo").textContent = t.n;
+    $("#tipo-desc").textContent = t.d;
+    const txt = fichaText();
+    $("#ficha-txt").value = txt;
+    $("#wa").href = "https://wa.me/?text=" + encodeURIComponent(txt);
+    show("fin");
+  }
+
+  function copyFicha() {
+    const ta = $("#ficha-txt"), msg = $("#copy-msg");
+    const fallback = () => { ta.focus(); ta.select(); msg.textContent = "Ficha seleccionada: cópiala y pégamela en nuestro chat."; };
+    try { navigator.clipboard.writeText(ta.value).then(() => { msg.textContent = "Ficha copiada. Pégamela en nuestro chat."; }, fallback); }
+    catch (e) { fallback(); }
+  }
+
+  function start(data) {
+    load();
+    if (data && data.st) st = data.st;
+    if (location.hash === "#inicio") { st = { view: "sobre", opened: false, step: 0, a: {}, done: false }; save(); }
+    document.querySelectorAll(".js-para").forEach((n) => (n.textContent = PARA));
+    $("#seal-letter").textContent = PARA.charAt(0);
+
+    try {
+      drawCover($("#ill-cover"));
+      drawWindow($("#win-1"), 5, C.rose);
+      drawWindow($("#win-2"), 9, C.lilac);
+      drawSprig($("#sprig"), 3);
+      drawSprig($("#sprig-2"), 8);
+      drawVine($("#vine"));
+      drawBouquet($("#bouquet"));
+    } catch (e) {}
+
+    glitchTick();
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(glitchTick, 110);
+
+    let rz = 0;
+    window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { if (wallName) drawWall(wallName, true); }, 250); });
+
+    $("#seal").addEventListener("click", openLetter);
+    $("#go-ficha").addEventListener("click", () => { show("ficha"); renderQ(); });
+    $("#prev").addEventListener("click", () => { if (st.step === 0) show("carta"); else go(st.step - 1); });
+    $("#next").addEventListener("click", () => { if (!$("#next").disabled) go(st.step + 1); });
+    $("#copy").addEventListener("click", copyFicha);
+    $("#back-sobres").addEventListener("click", () => show("carta"));
+    $("#redo").addEventListener("click", () => { st.step = 0; show("ficha"); renderQ(); });
+
+    if (st.done && st.view === "fin") finish();
+    else if (st.view === "ficha") { show("ficha"); renderQ(); }
+    else if (st.opened) show("carta");
+    else show("sobre");
+  }
+
+  window.claude?.hot?.snapshot?.(() => ({ st }));
+  window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});
+})();
+</script>
+
+</body>
+</html>
